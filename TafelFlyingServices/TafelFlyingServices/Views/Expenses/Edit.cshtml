@@ -1,0 +1,105 @@
+﻿@using System.Globalization
+@using TafelFlyingServices.Models
+@model TafelFlyingServices.Models.ExpenseModel
+
+@{
+    ViewBag.Title = "Edit";
+    var db = new ApplicationDbContext();
+    var tripDictionary = new Dictionary<int, string> {{0, "Select Invoice"}};
+    foreach (Trip trip in db.Trips)
+    {
+        tripDictionary.Add(trip.TripId, trip.InvoiceNumber.ToString(CultureInfo.InvariantCulture));
+    }
+}
+
+<h2>Edit</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("Edit", "Expenses", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Expense</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                @Html.HiddenFor(model => model.ExpenseId)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Type, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Type, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Type, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Amount, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Amount, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Amount, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TripId, "InvoiceNumber", new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.TripId, new SelectList(tripDictionary, "Key", "Value", ""), new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.TripId, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Photo, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Photo, new {type = "file", @class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Photo, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-4" id="ImagePreview">
+        <img src="@Url.Action("getImage", "Expenses", new {id = Model.ExpenseId})" alt="@Model.PhotoSource.SourceFilename" style="display: block; margin: auto; max-width: 100%;" />
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    $(function() {
+        $("#Photo").change(function() {
+            $("#ImagePreview").html("");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            if (regex.test($(this).val().toLowerCase())) {
+                if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                    $("#ImagePreview").show();
+                    $("#ImagePreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                } else {
+                    if (typeof (FileReader) != "undefined") {
+                        $("#ImagePreview").show();
+                        $("#ImagePreview").append("<img />");
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            $("#ImagePreview img").attr("src", e.target.result);
+                        };
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                }
+            } else {
+                alert("Please upload a valid image file.");
+            }
+        });
+    });
+</script>

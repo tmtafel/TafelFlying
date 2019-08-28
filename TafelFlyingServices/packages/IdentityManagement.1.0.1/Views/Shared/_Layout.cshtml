@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" ng-app="ByteBlocksIdentityPortal">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity Management - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body class="no-skin">
+    <div class="navbar navbar-default">
+        <div class="navbar-container" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="#" class="navbar-brand">
+                    <small>
+                        <i class="fa fa-group"></i>
+                        Identity Management Dashboard
+                    </small>
+                </a>
+            </div>
+        </div>
+        @Html.Partial("_LoginPartial")
+    </div>
+    <div class="main-container" id="main-container">
+        <div class="sidebar responsive" id="sidebar">
+            @Html.Partial("_SideNavigationBar")
+        </div>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                @RenderSection("breadcrumbs", required: false)
+            </div>
+            <div class="page-content">@RenderBody()</div>
+        </div>
+        <div class="footer">
+            <div class="footer-inner">
+                <div class="footer-content">
+                    @Html.Partial("_Copyright")
+                    <span class="action-buttons">
+                        <a href="https://www.twitter.com/byteblocks" target="_blank"><i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i></a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/datetime")
+@Scripts.Render("~/bundles/angular")
+@Scripts.Render("~/bundles/identity")
+@RenderSection("scripts", required: false)
+</body>
+</html>

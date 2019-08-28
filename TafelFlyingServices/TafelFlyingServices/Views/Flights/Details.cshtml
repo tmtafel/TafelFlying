@@ -1,0 +1,124 @@
+﻿@model TafelFlyingServices.Models.Flight
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="plane-details">
+    <div class="plane-header" style="background-color: @Model.Plane.Color;">
+        <div class="container">
+            <h2 class="text-center" style="color: @Model.Plane.BlackText;">
+                @Html.DisplayFor(model => model.Plane.TailNumber)
+            </h2>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-6">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DepartureAirport)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DepartureAirport.Name) (@Html.DisplayFor(model => model.DepartureAirport.AirportId)) <br />
+                                @Html.DisplayFor(model => model.Departure)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ArrivalAirport)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ArrivalAirport.Name) (@Html.DisplayFor(model => model.ArrivalAirport.AirportId)) <br />
+                                @Html.DisplayFor(model => model.Arrival)
+
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PilotInCommand)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.PilotInCommand.ApplicationUser.FirstName) @Html.DisplayFor(model => model.PilotInCommand.ApplicationUser.LastName)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.SecondInCommand)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.SecondInCommand.ApplicationUser.FirstName) @Html.DisplayFor(model => model.SecondInCommand.ApplicationUser.LastName)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-6">
+                        <div class="btn-group btn-group-lg btn-group-vertical visible-sm">
+                            @Html.ActionLink("Edit", "Edit", new {id = Model.FlightId}, new {@Class = "btn btn-saffron-umbrella-1"})
+                            @Html.ActionLink("Delete", "Delete", new {id = Model.FlightId}, new {@Class = "btn btn-saffron-umbrella-1"})
+                            @Html.ActionLink("List", "Index", null, new {@Class = "btn btn-saffron-umbrella-1"})
+                        </div>
+                        <div class="btn-group btn-group-lg btn-group-justified hidden-sm">
+                            @Html.ActionLink("Edit", "Edit", new {id = Model.FlightId}, new {@Class = "btn btn-saffron-umbrella-1"})
+                            @Html.ActionLink("Delete", "Delete", new {id = Model.FlightId}, new {@Class = "btn btn-saffron-umbrella-1"})
+                            @Html.ActionLink("List", "Index", null, new {@Class = "btn btn-saffron-umbrella-1"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 hidden-xs">
+                <div id="map-canvas" style="height: 500px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCFyqTpotZJBGzsULjGkjTN87tnTiT0isE&libraries=geometry">
+
+
+</script>
+
+<script src="~/Scripts/FlightDetails.js"></script>
+<script type="text/javascript">
+    function initialize() {
+        var map = new window.google.maps.Map(document.getElementById('map-canvas'));
+        var dLat = @Model.DepartureAirport.Latitude;
+        var dLng = @Model.DepartureAirport.Longitude;
+        var aLat = @Model.ArrivalAirport.Latitude;
+        var aLng = @Model.ArrivalAirport.Longitude;
+        var departMarker = makeMarker(
+            dLat,
+            dLng,
+            "@Model.DepartureAirport.Name",
+            "@Model.DepartureAirport.AirportId",
+            "@Model.DepartureAirport.City",
+            "@Model.DepartureAirport.StateOrProvidence",
+            map
+        );
+        var arriveMarker = makeMarker(
+            aLat,
+            aLng,
+            "@Model.ArrivalAirport.Name",
+            "@Model.ArrivalAirport.AirportId",
+            "@Model.ArrivalAirport.City",
+            "@Model.ArrivalAirport.StateOrProvidence",
+            map);
+        var swBound = new window.google.maps.LatLng((dLat <= aLat) ? dLat : aLat, (dLng <= aLng) ? dLng : aLng);
+        var neBound = new window.google.maps.LatLng((dLat > aLat) ? dLat : aLat, (dLng > aLng) ? dLng : aLng);
+        var bounds = new window.google.maps.LatLngBounds(swBound, neBound);
+        map.fitBounds(bounds);
+        createFlightPath(
+            departMarker,
+            arriveMarker,
+            map,
+            "@Model.Plane.Color"
+        );
+    };
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>

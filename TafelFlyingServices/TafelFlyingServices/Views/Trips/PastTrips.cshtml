@@ -1,0 +1,45 @@
+﻿@using TafelFlyingServices.Models
+@model IEnumerable<TafelFlyingServices.Models.Trip>
+
+@{
+    ViewBag.Title = "Past Trips";
+}
+
+<h2>PastTrips</h2>
+
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PilotFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoPilotFee)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (Trip item in Model)
+    {
+        <tr>
+            <td>
+                #@Html.DisplayFor(modelItem => item.InvoiceNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PilotFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoPilotFee)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.InvoiceNumber}) |
+                @Html.ActionLink("Details", "Details", new {id = item.InvoiceNumber}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.InvoiceNumber})
+            </td>
+        </tr>
+    }
+
+</table>

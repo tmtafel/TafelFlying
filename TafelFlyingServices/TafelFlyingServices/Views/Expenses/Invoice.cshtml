@@ -1,0 +1,42 @@
+﻿@using TafelFlyingServices.Models
+@model IEnumerable<TafelFlyingServices.Models.Expense>
+
+@{
+    ViewBag.Title = "Invoice";
+}
+
+<h2>Expenses for Invoice #@ViewBag.InvoiceNumber</h2>
+
+<p>
+    @Html.ActionLink("Add Expense", "Create", new {invoiceNumber = ViewBag.InvoiceNumber})
+    @Html.ActionLink("Back To Trip", "Details", "Trips", new {id = ViewBag.InvoiceNumber}, new {@class = "float-right"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (Expense item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.ExpenseId}) |
+                @Html.ActionLink("Details", "Details", new {id = item.ExpenseId}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.ExpenseId})
+            </td>
+        </tr>
+    }
+
+</table>

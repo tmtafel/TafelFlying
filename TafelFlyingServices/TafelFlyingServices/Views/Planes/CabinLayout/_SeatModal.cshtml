@@ -1,0 +1,64 @@
+﻿<div id="seatModal" class="modal fade">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Seat Properties</h4>
+			</div>
+			<div class="modal-body">
+
+				<div class="container-fluid">
+					<div class="row">
+						<div id="up" class="col-xs-4 col-xs-offset-4 direction">
+							<div class="btn btn-default">
+								<div class="seat-image seat-direction-up"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div id="left" class="col-xs-4 direction">
+							<div class="btn btn-default">
+								<div class="seat-image seat-direction-left"></div>
+							</div>
+						</div>
+						<div class="col-xs-4 seat-type">
+							<div class="btn btn-default">
+								<h4 class="seat-type-name"></h4>
+							</div>
+							@*<ul class="nav nav-pills" role="tablist">
+									<li role="presentation" class="dropdown open">
+										<button id="seatType" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<span id="selectedType">Choose Type</span>
+											<span class="caret"></span>
+										</button>
+										<ul id="seatTypeList" class="dropdown-menu" aria-labelledby="seatType">
+											<li><a href="#">Pilot</a></li>
+											<li><a href="#">Passenger</a></li>
+										</ul>
+									</li>
+								</ul>*@
+						</div>
+						<div id="right" class="col-xs-4 direction">
+							<div class="btn btn-default">
+								<div class="seat-image seat-direction-right"></div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div id="down" class="col-xs-4 col-xs-offset-4 direction">
+							<div class="btn btn-default">
+								<div class="seat-image seat-direction-down"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button id="update" type="button" class="btn btn-default">Update</button>
+				<button id="delete" type="button" class="btn btn-default">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>

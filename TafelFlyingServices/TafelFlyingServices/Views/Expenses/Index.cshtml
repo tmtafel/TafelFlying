@@ -1,0 +1,22 @@
+﻿@using TafelFlyingServices.Models
+@model List<TafelFlyingServices.Models.Trip>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.Invoices</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@foreach (Trip item in Model)
+{
+    string invoiceUrl = "/Expenses/Invoice/" + item.InvoiceNumber;
+    <a href=@invoiceUrl>
+        <div>
+            <h3>#@Html.DisplayFor(modelItem => item.InvoiceNumber)</h3>
+        </div>
+    </a>
+}

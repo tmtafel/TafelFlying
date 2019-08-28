@@ -1,0 +1,121 @@
+﻿@using TafelFlyingServices.Models
+@model TafelFlyingServices.Models.EditFlight
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-clockpicker.min.css">
+@{
+    ViewBag.Title = "Edit";
+    var db = new ApplicationDbContext();
+    Dictionary<string, string> airports = db.Airports.ToList().ToDictionary(a => a.AirportId, a => a.AirportId);
+    airports.Add("", "Select Airport");
+    Dictionary<int, string> pilots = db.Pilots.ToList().ToDictionary(p => p.PilotId, a => a.ApplicationUser.FirstName + " " + a.ApplicationUser.LastName);
+    pilots.Add(0, "Select Pilot");
+    Dictionary<string, string> planes = db.Planes.ToList().ToDictionary(p => p.TailNumber, p => p.TailNumber);
+    planes.Add("", "Select Plane");
+}
+
+<div class="plane-details">
+    <div class="plane-header" style="background-color: @Model.Color;">
+        <div class="container">
+            <h2 class="text-center" style="color: @Model.BlackText">
+                @Html.DisplayFor(model => model.TailNumber)
+            </h2>
+        </div>
+    </div>
+    <div class="container-fluid">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.FlightId)
+            <div class="row">
+                <div class="col-md-5 create-flight form-horizontal">
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.TailNumber, new {@class = "col-md-6"})
+                        @Html.LabelFor(m => m.DepartureDate, new {@class = "col-md-6"})
+                        @*Plane*@
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(m => m.TailNumber, new SelectList(planes, "Key", "Value", ""), new {@class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.TailNumber, "", new {@class = "text-danger"})
+                        </div>
+                        @*Date*@
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.DepartureDate, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.DepartureDate, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DepartureAirportId, new {@class = "col-md-12"})
+                        @*Depart From*@
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(m => m.DepartureAirportId, new SelectList(airports, "Key", "Value", ""), new {@class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.DepartureAirportId, "", new {@class = "text-danger"})
+                        </div>
+                        @*Depart At*@
+                        <div class="col-md-4">
+                            @Html.EditorFor(m => m.DepatureTime, new {htmlAttributes = new {id = "departure", @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.DepatureTime, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ArrivalAirportId, new {@class = "col-md-12"})
+                        @*Arrive To*@
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(m => m.ArrivalAirportId, new SelectList(airports, "Key", "Value", ""), new {@class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.ArrivalAirportId, "", new {@class = "text-danger"})
+                        </div>
+                        @*Arrive At*@
+                        <div class="col-md-4">
+                            @Html.EditorFor(m => m.ArrivalTime, new {htmlAttributes = new {id = "arrival", @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.ArrivalTime, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*Pilot In Command*@
+                        @Html.LabelFor(m => m.PilotInCommandId, new {@class = "col-md-6"})
+                        @Html.LabelFor(m => m.SecondInCommandId, new {@class = "col-md-6"})
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(m => m.PilotInCommandId, new SelectList(pilots, "Key", "Value", 0), new {id = "fic", @class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.PilotInCommandId, "", new {@class = "text-danger"})
+                        </div>
+                        @*Second In Command*@
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(m => m.SecondInCommandId, new SelectList(pilots, "Key", "Value", 0), new {id = "sic", @class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.SecondInCommandId, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FlightNumber, new {@class = "col-md-12"})
+                        @*Flight Number*@
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.FlightNumber, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.FlightNumber, "", new {@class = "text-danger"})
+                        </div>
+
+                        <div class="col-md-3 col-md-push-2">
+                            <input type="submit" value="Update" class="btn btn-lg btn-saffron-umbrella-1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/bootstrap-clockpicker.min.js"></script>
+<script type="text/javascript">
+    $('#arrival').clockpicker({
+        autoclose: true
+    });
+
+    $('#departure').clockpicker({
+        autoclose: true
+    });
+
+    $(document).ready(function() {
+        $("#departure").val("@Model.DepatureTime.ToShortTimeString()");
+        $("#arrival").val("@Model.ArrivalTime.ToShortTimeString()");
+    });
+
+</script>

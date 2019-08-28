@@ -1,0 +1,128 @@
+﻿@using Commerce.IdentityManagement.Models
+@model Commerce.IdentityManagement.Models.UserDetailsViewModel
+
+@{
+    ViewBag.Title = "User Details";
+}
+<div class="page-header"><h1>User Profile</h1></div>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="row">
+            <div class="col-xs-12 user-profile">
+                <h4 class="blue">
+                    <span class="middle">@Model.User.UserName</span>
+                </h4>
+                <div class="profile-user-info">
+                    @if (Model.Lockout.Status == LockoutStatus.Locked)
+                    {
+                        using (Html.BeginForm("Unlock", "UsersAdmin", FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+                        {
+                            @Html.Hidden("id", Model.User.Id)
+                        <i class="ace-icon fa fa-lock bigger-120"></i>
+                        <b>Account is locked</b>
+                            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-unlock"></i> Unlock it!</button>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("Lock", "UsersAdmin", FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+                        {
+                            @Html.Hidden("id", Model.User.Id)
+                        <i class="ace-icon fa fa-unlock bigger-120"></i>
+                        <b>Account is not locked</b>
+                            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-lock"></i> Lock it!</button>
+                        }
+                    }
+                </div>
+                
+                <div class="profile-user-info">
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">Display Name</div>
+                        <div class="profile-info-value"><span>@Model.User.UserName</span></div>
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">Logins</div>
+                        <div class="profile-info-value">
+                            @foreach (var login in Model.User.Logins)
+                            {
+                                <span class="label label-info">@login.LoginProvider</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">Two factor</div>
+                        <div class="profile-info-value">
+                            @if (@Model.User.TwoFactorEnabled)
+                            {
+                                <span class="label label-success">Enabled</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">Not Enabled</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">Phone Number</div>
+                        <div class="profile-info-value">
+                            @if (string.IsNullOrEmpty(@Model.User.PhoneNumber))
+                            {
+                                <span>User has not provided phone number</span>
+                            }
+                            else
+                            {
+                                <span class="label label-inverse">@Model.User.PhoneNumber</span>
+                            }
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.User.PhoneNumber))
+{
+    <div class="profile-info-row">
+        <div class="profile-info-name">Phone number confirmed</div>
+        <div class="profile-info-value">
+            @if (@Model.User.PhoneNumberConfirmed)
+            {
+                <span class="label label-success">Yes</span>
+            }
+            else
+            {
+                <span class="label label-danger">No</span>
+            }
+        </div>
+    </div>
+}
+                </div>
+                <div>
+                    <h4>Roles assigned to @Model.User.UserName</h4>
+                    @if (ViewBag.RoleNames.Count == 0)
+                    {
+                        <hr />
+                        <p>No roles found for this user.</p>
+                    }
+                    <ul class="list-unstyled">
+                        @foreach (var item in ViewBag.RoleNames)
+                        {
+                            <li><i class="ace-icon fa fa-angle-right bigger-110"></i> @item</li>
+                        }
+                    </ul>
+                </div>
+                <div>
+                    <a class="btn btn-sm btn-info" href="@Url.Action("Edit", "UsersAdmin", new{id=Model.User.Id})"><i class="ace-icon fa fa-pencil align-top bigger-125"></i> Edit</a> <a class="btn btn-danger btn-sm" href="@Url.Action("Index", "UsersAdmin")"><i class="ace-icon fa fa-arrow-left"></i> Go back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section breadcrumbs{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="@Url.Action("Index", "Home")">Home</a>
+        </li>
+        <li><a href="@Url.Action("Index", "UsersAdmin")"><i class="ace-icon fa fa-users"></i> Users</a></li>
+        <li class="active">@Model.User.UserName</li>
+    </ul><!-- .breadcrumb -->
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

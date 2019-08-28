@@ -1,0 +1,113 @@
+﻿@using Mvc.RazorTools.FontAwesome
+@using TafelFlyingServices.Models
+@model TafelFlyingServices.Models.FlightDay
+@{
+    ViewBag.Title = "Day";
+    dynamic monthName = ViewBag.MonthName;
+    int month = Model.Day.Month;
+    int day = Model.Day.Day;
+    int year = Model.Day.Year;
+}
+<div class="row">
+    <div class="col-xs-6">
+        <h2>
+            @monthName @day, @year
+        </h2>
+    </div>
+    <div class="col-xs-6 text-right">
+        <a class="btn btn-lg btn-saffron-umbrella-1" href="/Flights/Calendar/@year/@month">
+            Back To Month View
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="day-container col-md-4">
+        <div class="day-view">
+            <div class="schedule">
+                @if (Model.Flights.Count == 0)
+                {
+                    <div class="plane-div">
+                        <h2>No Flights Scheduled for this Day</h2>
+                    </div>
+                }
+                else
+                {
+                    foreach (FlightView flight in Model.Flights)
+                    {
+                        <div class="plane-div" style="border-color: @flight.Color; color: @flight.Color;" data-tailnumber="@flight.TailNumber" data-depart="@flight.Departure.Time" data-arrive="@flight.Arrival.Time">
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <p>@flight.TailNumber</p>
+                                    <p>@flight.Departure.Time - @flight.Arrival.Time</p>
+                                </div>
+                                <div class="col-xs-3 plane-info">
+                                    <a href="/Flights/Details/@flight.Id" style="color: @flight.Color;">
+                                        @Html.FontAwesome(FontAwesomeIconSet.InfoCircle)
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8>">
+        <div id="map-canvas" style="height: 500px"></div>
+    </div>
+</div>
+<script type="text/javascript"
+        src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCFyqTpotZJBGzsULjGkjTN87tnTiT0isE&libraries=geometry">
+
+
+
+</script>
+<script src="~/Scripts/FlightDetails.js"></script>
+<script type="text/javascript">
+    function initialize() {
+
+        var map = new window.google.maps.Map(document.getElementById('map-canvas'));
+
+        var swBound = new window.google.maps.LatLng(@Model.Bounds.SouthWest.Latitude, @Model.Bounds.SouthWest.Longitude);
+        var neBound = new window.google.maps.LatLng(@Model.Bounds.NorthEast.Latitude, @Model.Bounds.NorthEast.Longitude);
+        var bounds = new window.google.maps.LatLngBounds(swBound, neBound);
+        map.fitBounds(bounds);
+
+        @foreach (FlightView fd in Model.Flights)
+        {
+            <text>
+		var depature = makeMarker(
+            @fd.Departure.Latitude,
+            @fd.Departure.Longitude,
+            "@fd.Departure.Name",
+            "@fd.Departure.AirportCode",
+            "@fd.Departure.City",
+            "@fd.Departure.State",
+            map
+        );
+		var arrival = makeMarker(
+            @fd.Arrival.Latitude,
+            @fd.Arrival.Longitude,
+            "@fd.Arrival.Name",
+            "@fd.Arrival.AirportCode",
+            "@fd.Arrival.City",
+            "@fd.Arrival.State",
+            map
+        );
+		var planeDivs = $(".plane-div");
+		var div;
+		$.each(planeDivs, function(t){
+			if(($(planeDivs[t]).data("tailnumber") == "@fd.TailNumber") &&
+                ($(planeDivs[t]).data("depart") == "@fd.Departure.Time") &&
+                ($(planeDivs[t]).data("arrive") == "@fd.Arrival.Time"))
+			{
+				div = $(planeDivs[t]);
+			}
+		});
+		createFlightPath(depature, arrival, map, "@fd.Color");
+		</text>
+        }
+    };
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>

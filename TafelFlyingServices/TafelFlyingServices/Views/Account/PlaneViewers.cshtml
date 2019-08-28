@@ -1,0 +1,24 @@
+﻿@model Dictionary<string, List<string>>
+
+@{
+    ViewBag.Title = "PlaneViewers";
+}
+
+<h2>PlaneViewers</h2>
+
+@foreach (var item in Model)
+{
+    <div class="inline">
+        <h4>
+            @item.Key
+        </h4>
+        <ul>
+            @foreach (string email in item.Value)
+            {
+                <li>
+                    @email
+                </li>
+            }
+        </ul>
+    </div>
+}

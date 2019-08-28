@@ -1,0 +1,1028 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{791D18D6-4825-4758-9626-BA657CF9F772}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TafelFlyingServices</RootNamespace>
+    <AssemblyName>TafelFlyingServices</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <NuGetPackageImportStamp>9f2efb67</NuGetPackageImportStamp>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Geocoding, Version=3.6.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Geocoding.net.3.6.1\lib\net40\Geocoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.RazorTools">
+      <HintPath>..\packages\Mvc.RazorTools.Base.1.0.5\lib\net45\Mvc.RazorTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Mvc.RazorTools.FontAwesome, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Mvc.RazorTools.FontAwesome.4.3.0.0\lib\net45\Mvc.RazorTools.FontAwesome.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.7\lib\net45\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.7\lib\net45\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.WebHelpers.3.2.7\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core">
+      <HintPath>..\packages\Google.Apis.Core.1.40.2\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis">
+      <HintPath>..\packages\Google.Apis.1.40.2\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices">
+      <HintPath>..\packages\Google.Apis.1.40.2\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth">
+      <HintPath>..\packages\Google.Apis.Auth.1.40.2\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices">
+      <HintPath>..\packages\Google.Apis.Auth.1.40.2\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Fusiontables.v1">
+      <HintPath>..\packages\Google.Apis.Fusiontables.v1.1.40.2.1051\lib\net45\Google.Apis.Fusiontables.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\FontAwesomeBundleConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\Razor Tools\FontAwesome.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\AircraftController.cs" />
+    <Compile Include="Controllers\AirportsController.cs" />
+    <Compile Include="Controllers\ExpensesController.cs" />
+    <Compile Include="Controllers\FlightsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PilotsController.cs" />
+    <Compile Include="Controllers\PlanesController.cs" />
+    <Compile Include="Controllers\TripsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506051854364_init.cs" />
+    <Compile Include="Migrations\201506051854364_init.Designer.cs">
+      <DependentUpon>201506051854364_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507072244254_newDatabase.cs" />
+    <Compile Include="Migrations\201507072244254_newDatabase.Designer.cs">
+      <DependentUpon>201507072244254_newDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507101445564_updateEditPlane.cs" />
+    <Compile Include="Migrations\201507101445564_updateEditPlane.Designer.cs">
+      <DependentUpon>201507101445564_updateEditPlane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507101534124_updateEditPlane2.cs" />
+    <Compile Include="Migrations\201507101534124_updateEditPlane2.Designer.cs">
+      <DependentUpon>201507101534124_updateEditPlane2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507102128400_removePlaneViews.cs" />
+    <Compile Include="Migrations\201507102128400_removePlaneViews.Designer.cs">
+      <DependentUpon>201507102128400_removePlaneViews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507282110577_addblacktext.cs" />
+    <Compile Include="Migrations\201507282110577_addblacktext.Designer.cs">
+      <DependentUpon>201507282110577_addblacktext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507282112024_addblacktext1.cs" />
+    <Compile Include="Migrations\201507282112024_addblacktext1.Designer.cs">
+      <DependentUpon>201507282112024_addblacktext1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507282119298_addblacktext2.cs" />
+    <Compile Include="Migrations\201507282119298_addblacktext2.Designer.cs">
+      <DependentUpon>201507282119298_addblacktext2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507282211230_addblacktext3.cs" />
+    <Compile Include="Migrations\201507282211230_addblacktext3.Designer.cs">
+      <DependentUpon>201507282211230_addblacktext3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507291853581_flightUpdate.cs" />
+    <Compile Include="Migrations\201507291853581_flightUpdate.Designer.cs">
+      <DependentUpon>201507291853581_flightUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507291950388_flightUpdate2.cs" />
+    <Compile Include="Migrations\201507291950388_flightUpdate2.Designer.cs">
+      <DependentUpon>201507291950388_flightUpdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507291959184_flightUpdate3.cs" />
+    <Compile Include="Migrations\201507291959184_flightUpdate3.Designer.cs">
+      <DependentUpon>201507291959184_flightUpdate3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507292039365_flightUpdate4.cs" />
+    <Compile Include="Migrations\201507292039365_flightUpdate4.Designer.cs">
+      <DependentUpon>201507292039365_flightUpdate4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507292058424_planeUpdate.cs" />
+    <Compile Include="Migrations\201507292058424_planeUpdate.Designer.cs">
+      <DependentUpon>201507292058424_planeUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507301711133_updateAircraft.cs" />
+    <Compile Include="Migrations\201507301711133_updateAircraft.Designer.cs">
+      <DependentUpon>201507301711133_updateAircraft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507301721007_updateAircraft2.cs" />
+    <Compile Include="Migrations\201507301721007_updateAircraft2.Designer.cs">
+      <DependentUpon>201507301721007_updateAircraft2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507312103249_updateDatabase.cs" />
+    <Compile Include="Migrations\201507312103249_updateDatabase.Designer.cs">
+      <DependentUpon>201507312103249_updateDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508031320427_updateDatabase6.cs" />
+    <Compile Include="Migrations\201508031320427_updateDatabase6.Designer.cs">
+      <DependentUpon>201508031320427_updateDatabase6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508031330269_updateAccount1.cs" />
+    <Compile Include="Migrations\201508031330269_updateAccount1.Designer.cs">
+      <DependentUpon>201508031330269_updateAccount1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508031416438_updateFlight9.cs" />
+    <Compile Include="Migrations\201508031416438_updateFlight9.Designer.cs">
+      <DependentUpon>201508031416438_updateFlight9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508031843417_updateTrips.cs" />
+    <Compile Include="Migrations\201508031843417_updateTrips.Designer.cs">
+      <DependentUpon>201508031843417_updateTrips.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508031844277_updateTrips2.cs" />
+    <Compile Include="Migrations\201508031844277_updateTrips2.Designer.cs">
+      <DependentUpon>201508031844277_updateTrips2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508051909062_addCrewPassengerToPlane.cs" />
+    <Compile Include="Migrations\201508051909062_addCrewPassengerToPlane.Designer.cs">
+      <DependentUpon>201508051909062_addCrewPassengerToPlane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508051933291_addCrewPassengerToPlane2.cs" />
+    <Compile Include="Migrations\201508051933291_addCrewPassengerToPlane2.Designer.cs">
+      <DependentUpon>201508051933291_addCrewPassengerToPlane2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509151959530_updatePlaneLayout.cs" />
+    <Compile Include="Migrations\201509151959530_updatePlaneLayout.Designer.cs">
+      <DependentUpon>201509151959530_updatePlaneLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509152050406_updatePlaneLayout2.cs" />
+    <Compile Include="Migrations\201509152050406_updatePlaneLayout2.Designer.cs">
+      <DependentUpon>201509152050406_updatePlaneLayout2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509152242506_updatePlaneLayout3.cs" />
+    <Compile Include="Migrations\201509152242506_updatePlaneLayout3.Designer.cs">
+      <DependentUpon>201509152242506_updatePlaneLayout3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509152250069_updatePlaneLayout4.cs" />
+    <Compile Include="Migrations\201509152250069_updatePlaneLayout4.Designer.cs">
+      <DependentUpon>201509152250069_updatePlaneLayout4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509160301553_UpdateLayout.cs" />
+    <Compile Include="Migrations\201509160301553_UpdateLayout.Designer.cs">
+      <DependentUpon>201509160301553_UpdateLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509161401304_updateLayout4.cs" />
+    <Compile Include="Migrations\201509161401304_updateLayout4.Designer.cs">
+      <DependentUpon>201509161401304_updateLayout4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509161423060_updateLayout5.cs" />
+    <Compile Include="Migrations\201509161423060_updateLayout5.Designer.cs">
+      <DependentUpon>201509161423060_updateLayout5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509161436299_updateLayout6.cs" />
+    <Compile Include="Migrations\201509161436299_updateLayout6.Designer.cs">
+      <DependentUpon>201509161436299_updateLayout6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509161441149_updateLayout7.cs" />
+    <Compile Include="Migrations\201509161441149_updateLayout7.Designer.cs">
+      <DependentUpon>201509161441149_updateLayout7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509161534192_updateLayout8.cs" />
+    <Compile Include="Migrations\201509161534192_updateLayout8.Designer.cs">
+      <DependentUpon>201509161534192_updateLayout8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509161535464_updateLayout9.cs" />
+    <Compile Include="Migrations\201509161535464_updateLayout9.Designer.cs">
+      <DependentUpon>201509161535464_updateLayout9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Aircraft.cs" />
+    <Compile Include="Models\Airport.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
+    <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\Flight.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Pilot.cs" />
+    <Compile Include="Models\Plane.cs" />
+    <Compile Include="Models\Trip.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".nuget\NuGet.exe" />
+    <Content Include="App_Data\TafelFlyingServices.mdf" />
+    <Content Include="App_Data\TafelFlyingServices_log.ldf">
+      <DependentUpon>TafelFlyingServices.mdf</DependentUpon>
+    </Content>
+    <Content Include="bin\agilex.json.client.dll" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\Geocoding.dll" />
+    <Content Include="bin\Google.Apis.Auth.dll" />
+    <Content Include="bin\Google.Apis.Auth.PlatformServices.dll" />
+    <Content Include="bin\Google.Apis.Core.dll" />
+    <Content Include="bin\Google.Apis.dll" />
+    <Content Include="bin\Google.Apis.MapsEngine.exp2.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.xml" />
+    <Content Include="bin\Microsoft.Owin.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Facebook.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Google.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.MicrosoftAccount.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.Twitter.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.xml" />
+    <Content Include="bin\Microsoft.Owin.xml" />
+    <Content Include="bin\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\Microsoft.Web.Helpers.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Mvc.Extensions.dll" />
+    <Content Include="bin\Mvc.GoogleMaps.dll" />
+    <Content Include="bin\Mvc.RazorTools.dll" />
+    <Content Include="bin\Mvc.RazorTools.FontAwesome.dll" />
+    <Content Include="bin\Mvc.RazorTools.FontAwesome.xml" />
+    <Content Include="bin\Mvc.RazorTools.xml" />
+    <Content Include="bin\MvcCheckBoxList.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\NGeo.dll" />
+    <Content Include="bin\Owin.dll" />
+    <Content Include="bin\System.Net.Http.Extensions.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Optimization.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
+    <Content Include="bin\TafelFlyingServices.dll" />
+    <Content Include="bin\TafelFlyingServices.pdb" />
+    <Content Include="bin\WebActivatorEx.dll" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="bin\WebMatrix.Data.dll" />
+    <Content Include="bin\WebMatrix.Data.xml" />
+    <Content Include="bin\WebMatrix.WebData.dll" />
+    <Content Include="bin\WebMatrix.WebData.xml" />
+    <Content Include="bin\XYZ.CalendarHelper.dll" />
+    <Content Include="bootstrap-theme.css" />
+    <Content Include="bootstrap-theme.min.css" />
+    <Content Include="bootstrap.css" />
+    <Content Include="bootstrap.min.css" />
+    <Content Include="Content\bootstrap-clockpicker.min.css" />
+    <Content Include="Content\button-themes.css">
+      <DependentUpon>button-themes.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\button-themes.min.css">
+      <DependentUpon>button-themes.css</DependentUpon>
+    </Content>
+    <Content Include="Content\cabin-layout.css">
+      <DependentUpon>cabin-layout.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\cabin-layout.min.css">
+      <DependentUpon>cabin-layout.css</DependentUpon>
+    </Content>
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fontawesome\font-awesome.css" />
+    <Content Include="Content\fontawesome\font-awesome.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\SimpleDropDownEffects\css\common.css" />
+    <Content Include="Content\SimpleDropDownEffects\css\demo.css" />
+    <Content Include="Content\SimpleDropDownEffects\css\fonts\icomoon.svg" />
+    <Content Include="Content\SimpleDropDownEffects\css\fonts\license.txt" />
+    <Content Include="Content\SimpleDropDownEffects\css\icons.css" />
+    <Content Include="Content\SimpleDropDownEffects\css\style1.css" />
+    <Content Include="Content\SimpleDropDownEffects\css\style2.css" />
+    <Content Include="Content\SimpleDropDownEffects\css\style3.css" />
+    <Content Include="Content\SimpleDropDownEffects\css\style4.css" />
+    <Content Include="Content\SimpleDropDownEffects\css\style5.css" />
+    <Content Include="Content\SimpleDropDownEffects\css\style6.css" />
+    <Content Include="Content\SimpleDropDownEffects\images\grid_DominikKiss_SubtlePatterns.jpg" />
+    <Content Include="Content\SimpleDropDownEffects\index.html" />
+    <Content Include="Content\SimpleDropDownEffects\index2.html" />
+    <Content Include="Content\SimpleDropDownEffects\index3.html" />
+    <Content Include="Content\SimpleDropDownEffects\index4.html" />
+    <Content Include="Content\SimpleDropDownEffects\index5.html" />
+    <Content Include="Content\SimpleDropDownEffects\index6.html" />
+    <Content Include="Content\SimpleDropDownEffects\js\jquery.dropdown.js" />
+    <Content Include="Content\SimpleDropDownEffects\js\modernizr.custom.63321.js" />
+    <Content Include="Content\SimpleDropDownEffects\README.txt" />
+    <Content Include="Content\site.css">
+      <DependentUpon>site.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\site.min.css">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="dashboard.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="font-awesome.css" />
+    <Content Include="font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Image\all-airports.png" />
+    <Content Include="Image\background-grid.png" />
+    <Content Include="Image\background-hour.png" />
+    <Content Include="Image\logo\TafelFlyingLogo-160x70.png" />
+    <Content Include="Image\logo\TafelFlyingLogo-46x20.png" />
+    <Content Include="Image\logo\TafelFlyingLogo-753x330-hover.png" />
+    <Content Include="Image\logo\TafelFlyingLogo-753x330.png" />
+    <Content Include="Image\logo\TafelFlyingLogo-91x40.png" />
+    <Content Include=".nuget\NuGet.Config" />
+    <Content Include=".nuget\NuGet.targets" />
+    <Content Include="Content\SimpleDropDownEffects\.DS_Store" />
+    <Content Include="Content\SimpleDropDownEffects\css\fonts\icomoon.eot" />
+    <Content Include="Content\SimpleDropDownEffects\css\fonts\icomoon.ttf" />
+    <Content Include="Content\SimpleDropDownEffects\css\fonts\icomoon.woff" />
+    <Content Include="Content\SimpleDropDownEffects\README.md" />
+    <Content Include="obj\Release\TafelFlyingServices.csproj.App.config" />
+    <Content Include="obj\Release\TafelFlyingServices.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\TafelFlyingServices.dll" />
+    <Content Include="obj\Release\TafelFlyingServices.pdb" />
+    <Content Include="obj\Release\_WPPLastBuildInfo.txt" />
+    <Content Include="Scripts\airport.js" />
+    <Content Include="Scripts\bootstrap-clockpicker.min.js" />
+    <Content Include="Scripts\css\bootstrap-clockpicker.css" />
+    <Content Include="Scripts\bootstrap-clockpicker.js" />
+    <Content Include="Scripts\createAirport.js" />
+    <Content Include="Scripts\FlightDetails.js" />
+    <Content Include="Scripts\img\pin\airport.png" />
+    <Content Include="Image\avatar_user.png" />
+    <Content Include="bootstrap-theme.css.map" />
+    <Content Include="bootstrap.css.map" />
+    <Content Include="App_Data\airports.dat" />
+    <Content Include="MapAddress.cshtml" />
+    <Content Include="bin\TafelFlyingServices.dll.config" />
+    <Content Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Release\TafelFlyingServices.csproj.GenerateResource.Cache" />
+    <Content Include="obj\Release\TransformWebConfig\assist\Web.config" />
+    <Content Include="obj\Release\TransformWebConfig\original\Web.config" />
+    <Content Include="obj\Release\TransformWebConfig\transformed\Web.config" />
+    <Content Include="obj\Release\InsertEFCodeFirstDeploy\original\Web.config" />
+    <Content Include="obj\Release\InsertEFCodeFirstDeploy\transformed\Web.config" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\cabin-layout.scss" />
+    <Content Include="Content\site.scss" />
+    <Content Include="Content\button-themes.scss" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\TafelFlying - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\TafelFlying - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-migrate-3.0.0.js" />
+    <Content Include="Scripts\jquery-migrate-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-simplecolorpicker-master\demo.html" />
+    <Content Include="Content\jquery-simplecolorpicker-master\jquery.simplecolorpicker-fontawesome.css" />
+    <Content Include="Content\jquery-simplecolorpicker-master\jquery.simplecolorpicker-glyphicons.css" />
+    <Content Include="Content\jquery-simplecolorpicker-master\jquery.simplecolorpicker-regularfont.css" />
+    <Content Include="Content\jquery-simplecolorpicker-master\jquery.simplecolorpicker.css" />
+    <Content Include="Scripts\jquery-simplecolorpicker-master\jquery.simplecolorpicker.js" />
+    <Content Include="Scripts\jquery-simplecolorpicker-master\LICENSE.txt" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.color-2.1.2.js" />
+    <Content Include="Scripts\jquery.color-2.1.2.min.js" />
+    <Content Include="Scripts\jquery.color.svg-names-2.1.2.js" />
+    <Content Include="Scripts\jquery.color.svg-names-2.1.2.min.js" />
+    <Content Include="Scripts\jquery.dropdown.js" />
+    <Content Include="Scripts\jquery.reversegeocode.js" />
+    <Content Include="Scripts\jquery.reversegeocode.min.js" />
+    <Content Include="Scripts\jquery-simplecolorpicker-master\bower.json" />
+    <Content Include="Scripts\jquery-simplecolorpicker-master\README.md" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\cabin-layout.js" />
+    <Content Include="Scripts\MobileCalendar.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\plane-color-picker.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\RoleChange.js" />
+    <Content Include="Scripts\SearchRadioButton.js" />
+    <Content Include="Content\slick\ajax-loader.gif" />
+    <Content Include="Content\slick\fonts\slick.svg" />
+    <Content Include="Content\slick\slick-theme.css" />
+    <Content Include="Content\slick\slick.css" />
+    <Content Include="Content\slick\slick.js" />
+    <Content Include="Content\slick\slick.min.js" />
+    <Content Include="Scripts\turn.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Site.css" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\IsAPilot.cshtml" />
+    <Content Include="Views\Account\Login.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Pilots\Index.cshtml" />
+    <Content Include="Views\Airports\Create.cshtml" />
+    <Content Include="Views\Airports\Delete.cshtml" />
+    <Content Include="Views\Airports\Details.cshtml" />
+    <Content Include="Views\Airports\Edit.cshtml" />
+    <Content Include="Views\Airports\Index.cshtml" />
+    <Content Include="Views\Airports\Search.cshtml" />
+    <Content Include="Views\Flights\Create.cshtml" />
+    <Content Include="Views\Flights\Delete.cshtml" />
+    <Content Include="Views\Flights\Details.cshtml" />
+    <Content Include="Views\Flights\Edit.cshtml" />
+    <Content Include="Views\Flights\Index.cshtml" />
+    <Content Include="Views\Flights\Calendar.cshtml" />
+    <Content Include="Views\Flights\Day.cshtml" />
+    <Content Include="Views\Account\PlaneViewers.cshtml" />
+    <Content Include="Views\Trips\Create.cshtml" />
+    <Content Include="Views\Trips\Delete.cshtml" />
+    <Content Include="Views\Trips\Details.cshtml" />
+    <Content Include="Views\Trips\Edit.cshtml" />
+    <Content Include="Views\Trips\Index.cshtml" />
+    <Content Include="Views\Expenses\Create.cshtml" />
+    <Content Include="Views\Expenses\Delete.cshtml" />
+    <Content Include="Views\Expenses\Details.cshtml" />
+    <Content Include="Views\Expenses\Edit.cshtml" />
+    <Content Include="Views\Expenses\Index.cshtml" />
+    <Content Include="Views\Expenses\Invoice.cshtml" />
+    <Content Include="Views\Trips\PastTrips.cshtml" />
+    <Content Include="Views\Aircraft\Create.cshtml" />
+    <Content Include="Views\Aircraft\Delete.cshtml" />
+    <Content Include="Views\Aircraft\Details.cshtml" />
+    <Content Include="Views\Aircraft\Edit.cshtml" />
+    <Content Include="Views\Aircraft\Index.cshtml" />
+    <Content Include="Views\Planes\Create.cshtml" />
+    <Content Include="Views\Planes\Delete.cshtml" />
+    <Content Include="Views\Planes\Details.cshtml" />
+    <Content Include="Views\Planes\Edit.cshtml" />
+    <Content Include="Views\Planes\Index.cshtml" />
+    <Content Include="Views\Flights\_MonthView.cshtml" />
+    <Content Include="Views\Flights\_DayView.cshtml" />
+    <Content Include="Content\slick\config.rb" />
+    <Content Include="Content\slick\fonts\slick.eot" />
+    <Content Include="Content\slick\fonts\slick.ttf" />
+    <Content Include="Content\slick\fonts\slick.woff" />
+    <Content Include="Content\slick\slick-theme.scss" />
+    <Content Include="Content\slick\slick.scss" />
+    <Content Include="Views\Flights\_AllFlightsFullScreen.cshtml" />
+    <Content Include="Views\Flights\_AllFlightsMobile.cshtml" />
+    <Content Include="Views\Pilots\Details.cshtml" />
+    <Content Include="Views\Pilots\Edit.cshtml" />
+    <Content Include="Views\Airports\_AirportsFullScreen.cshtml" />
+    <Content Include="Views\Airports\_AirportsMobile.cshtml" />
+    <Content Include="Views\Planes\CabinLayout.cshtml" />
+    <Content Include="Views\Planes\CabinLayout\_DropDownMenu.cshtml" />
+    <Content Include="Views\Planes\CabinLayout\_AlertModal.cshtml" />
+    <Content Include="Views\Planes\CabinLayout\_Options.cshtml" />
+    <Content Include="Views\Planes\CabinLayout\_SeatModal.cshtml" />
+    <None Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <None Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <None Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <None Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js" />
+    <None Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <None Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <None Include="Scripts\README.md" />
+    <None Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.min.js" />
+    <None Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper.js" />
+    <None Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <None Include="Scripts\popper-utils.js.map" />
+    <Content Include="Scripts\popper-utils.js" />
+    <None Include="Scripts\index.d.ts" />
+    <None Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <None Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper.js" />
+    <None Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <None Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <None Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.js" />
+    <None Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <None Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <None Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.min.css" />
+    <None Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.css" />
+    <None Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <None Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <None Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <None Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-grid.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506051854364_init.resx">
+      <DependentUpon>201506051854364_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507072244254_newDatabase.resx">
+      <DependentUpon>201507072244254_newDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507101445564_updateEditPlane.resx">
+      <DependentUpon>201507101445564_updateEditPlane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507101534124_updateEditPlane2.resx">
+      <DependentUpon>201507101534124_updateEditPlane2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507102128400_removePlaneViews.resx">
+      <DependentUpon>201507102128400_removePlaneViews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507282110577_addblacktext.resx">
+      <DependentUpon>201507282110577_addblacktext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507282112024_addblacktext1.resx">
+      <DependentUpon>201507282112024_addblacktext1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507282119298_addblacktext2.resx">
+      <DependentUpon>201507282119298_addblacktext2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507282211230_addblacktext3.resx">
+      <DependentUpon>201507282211230_addblacktext3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507291853581_flightUpdate.resx">
+      <DependentUpon>201507291853581_flightUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507291950388_flightUpdate2.resx">
+      <DependentUpon>201507291950388_flightUpdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507291959184_flightUpdate3.resx">
+      <DependentUpon>201507291959184_flightUpdate3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507292039365_flightUpdate4.resx">
+      <DependentUpon>201507292039365_flightUpdate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507292058424_planeUpdate.resx">
+      <DependentUpon>201507292058424_planeUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507301711133_updateAircraft.resx">
+      <DependentUpon>201507301711133_updateAircraft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507301721007_updateAircraft2.resx">
+      <DependentUpon>201507301721007_updateAircraft2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507312103249_updateDatabase.resx">
+      <DependentUpon>201507312103249_updateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508031320427_updateDatabase6.resx">
+      <DependentUpon>201508031320427_updateDatabase6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508031330269_updateAccount1.resx">
+      <DependentUpon>201508031330269_updateAccount1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508031416438_updateFlight9.resx">
+      <DependentUpon>201508031416438_updateFlight9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508031843417_updateTrips.resx">
+      <DependentUpon>201508031843417_updateTrips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508031844277_updateTrips2.resx">
+      <DependentUpon>201508031844277_updateTrips2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508051909062_addCrewPassengerToPlane.resx">
+      <DependentUpon>201508051909062_addCrewPassengerToPlane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508051933291_addCrewPassengerToPlane2.resx">
+      <DependentUpon>201508051933291_addCrewPassengerToPlane2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509151959530_updatePlaneLayout.resx">
+      <DependentUpon>201509151959530_updatePlaneLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509152050406_updatePlaneLayout2.resx">
+      <DependentUpon>201509152050406_updatePlaneLayout2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509152242506_updatePlaneLayout3.resx">
+      <DependentUpon>201509152242506_updatePlaneLayout3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509152250069_updatePlaneLayout4.resx">
+      <DependentUpon>201509152250069_updatePlaneLayout4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509160301553_UpdateLayout.resx">
+      <DependentUpon>201509160301553_UpdateLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509161401304_updateLayout4.resx">
+      <DependentUpon>201509161401304_updateLayout4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509161423060_updateLayout5.resx">
+      <DependentUpon>201509161423060_updateLayout5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509161436299_updateLayout6.resx">
+      <DependentUpon>201509161436299_updateLayout6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509161441149_updateLayout7.resx">
+      <DependentUpon>201509161441149_updateLayout7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509161534192_updateLayout8.resx">
+      <DependentUpon>201509161534192_updateLayout8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509161535464_updateLayout9.resx">
+      <DependentUpon>201509161535464_updateLayout9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.Access.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.Access2.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.airport.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.airport1.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.airpotnew.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.airpotnew1.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.airpotnew2.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.airpotnew3.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.flight.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.flight1.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.flightdb.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.flightdb1.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.PlaneMigration.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.PlaneMigration1.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.PlaneMigration16.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.PlaneMigration2.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.PlaneMigration3.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.PlaneMigration4.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.PlaneMigration5.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.PlaneMigration6.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.PlaneMigration7.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.PlaneMigration8.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.reqMigration.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.update.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.update1.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.update10.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.update11.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.update12.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.update13.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.update15.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.update16.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.update8.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.update9.resources" />
+    <EmbeddedResource Include="obj\Release\TafelFlyingServices.Migrations.updatePlaneModle.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\fonts\" />
+    <Folder Include="obj\Release\Database\" />
+    <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />
+    <Folder Include="obj\Release\TempPE\" />
+    <Folder Include="obj\Release\TransformWebConfig\transformed\obj\Release\TransformWebConfig\assist\" />
+    <Folder Include="obj\Release\TransformWebConfig\transformed\obj\Release\TransformWebConfig\original\" />
+    <Folder Include="obj\Release\TransformWebConfig\transformed\obj\Release\TransformWebConfig\transformed\" />
+    <Folder Include="obj\Release\TransformWebConfig\transformed\Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49579</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49506/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

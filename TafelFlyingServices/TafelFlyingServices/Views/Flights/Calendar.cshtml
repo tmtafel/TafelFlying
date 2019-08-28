@@ -1,0 +1,59 @@
+﻿@using TafelFlyingServices.Models
+@model TafelFlyingServices.Models.FlightCalendar
+@{
+
+    ViewBag.Title = "Calendar";
+    var weekdays = new List<string> {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    string today = DateTime.Now.Date.ToString("yyyy-M-d");
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6 text-left">
+            @Html.ActionLink("All Flights", "Index", "Flights", null, new {@class = "btn btn-lg btn-saffron-umbrella-1"})
+        </div>
+        <div class="col-xs-6 text-right">
+            @Html.ActionLink("Create New Flight", "Create", "Flights", null, new {@class = "btn btn-lg btn-saffron-umbrella-1"})
+        </div>
+    </div>
+    <div class="calendar-month row">
+        <h2 class="text-center col-xs-12">
+            @Model.MonthName @Model.Year
+        </h2>
+        @foreach (string day in weekdays)
+        {
+            <div class="day-in-month-view text-center">
+                @day
+            </div>
+        }
+        @foreach (FlightDay day in Model.Days)
+        {
+            string href = "/Flights/Day/" + @day.Day.Year + "/" + @day.Day.Month + "/" + @day.Day.Day;
+            <a href="@href">
+                <div class="day-in-month-view single-day">
+                    <div class="day-number">
+                        <strong>
+                            @day.Day.Day
+                        </strong>
+                    </div>
+                    @if (day.Flights != null)
+                    {
+                        foreach (FlightView flight in day.Flights)
+                        {
+                            <div class="flight-info" style="background-color: @flight.Color;">
+                                @flight.TailNumber<br /> @flight.Departure.AirportCode - @flight.Arrival.AirportCode
+                            </div>
+                        }
+                    }
+                </div>
+            </a>
+        }
+    </div>
+</div>
+
+@*<div class="hidden-xs">
+			@Html.Partial("~/Views/Flights/_MonthView.cshtml", Model)
+		</div>
+		<div class="visible-xs">
+			@Html.Partial("~/Views/Flights/_DayView.cshtml")
+		</div>
+	</div>*@

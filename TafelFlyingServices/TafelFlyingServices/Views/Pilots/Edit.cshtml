@@ -1,0 +1,44 @@
+﻿@using TafelFlyingServices.Models
+@model TafelFlyingServices.Models.Pilot
+
+@{
+    ViewBag.Title = "Edit";
+    var db = new ApplicationDbContext();
+    Dictionary<string, string> users = db.Users.ToDictionary(user => user.Id, user => user.Email);
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Pilot</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.HiddenFor(model => model.PilotId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicationUserId, new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ApplicationUserId, new SelectList(users, "Key", "Value"), new {@class = "form-control"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

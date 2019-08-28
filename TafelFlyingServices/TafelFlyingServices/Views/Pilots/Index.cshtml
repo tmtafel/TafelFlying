@@ -1,0 +1,28 @@
+﻿@using TafelFlyingServices.Models
+@model IEnumerable<TafelFlyingServices.Models.Pilot>
+
+@{
+    ViewBag.Title = "Pilots";
+}
+
+<h2>Pilots</h2>
+
+<div class="row">
+    @foreach (Pilot item in Model)
+    {
+        <div class="col-sm-6">
+            <h3>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName) @Html.DisplayFor(modelItem => item.ApplicationUser.LastName)
+            </h3>
+            <p>
+               
+            </p>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul class="pagination">
+                    <li>@Html.ActionLink("Details", "Details", new {id = item.PilotId})</li>
+                </ul>
+            }
+        </div>
+    }
+</div>

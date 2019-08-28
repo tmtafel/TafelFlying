@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html xmlns:ng="http://angularjs.org" ng-app="ByteBlocksIdentityPortal">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Identity Management - @ViewBag.Title</title>
+    <meta name="author" content="ByteBlocks.com">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+    <body class="login-layout">
+        <div>
+            @RenderBody()
+        </div>
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @Scripts.Render("~/bundles/datetime")
+            @Scripts.Render("~/bundles/angular")
+            @Scripts.Render("~/bundles/identity")
+            @RenderSection("scripts", required: false)
+</body>
+</html>

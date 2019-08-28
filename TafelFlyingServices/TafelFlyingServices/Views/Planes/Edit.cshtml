@@ -1,0 +1,161 @@
+﻿@using Mvc.RazorTools.FontAwesome
+@using TafelFlyingServices.Models
+@model TafelFlyingServices.Models.EditPlaneViewModel
+
+@{
+    ViewBag.Title = Model.TailNumber + " - Edit";
+    var db = new ApplicationDbContext();
+    Dictionary<int, string> aircraftList = db.Aircraft.ToList().ToDictionary(a => a.AircraftId, a => a.Make + "-" + a.Model);
+    var colorList = new Dictionary<string, string>
+    {
+        {"#7bd148", "#7bd148"},
+        {"#5484ed", "#5484ed"},
+        {"#a4bdfc", "#a4bdfc"},
+        {"#46d6db", "#46d6db"},
+        {"#7ae7bf", "#7ae7bf"},
+        {"#51b749", "#51b749"},
+        {"#fbd75b", "#fbd75b"},
+        {"#ffb878", "#ffb878"},
+        {"#ff887c", "#ff887c"},
+        {"#dc2127", "#dc2127"},
+        {"#dbadff", "#dbadff"},
+        {"#e1e1e1", "#e1e1e1"}
+    };
+    string blackText = Model.BlackText ? "#000000" : "#ffffff";
+}
+<div class="plane-details">
+    <div class="plane-header" style="background-color: @Model.Color;">
+        <div class="container">
+            <h2 class="text-center" style="color: @blackText">
+                @Html.DisplayFor(model => model.TailNumber)
+            </h2>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="col-sm-12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.TailNumber)
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <h3 class="text-center">Aircraft</h3>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group text-center">
+                                        @Html.DropDownListFor(m => m.AircraftId, new SelectList(aircraftList, "Key", "Value", ""), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.AircraftId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+	                                    <div class="col-xs-6">
+
+											<a href="/Planes/CabinLayout/@Model.TailNumber" class="btn btn-acid-grey-1">Edit Layout</a>
+		                                    <h4 class="text-center">
+			                                    Pilot Seats
+		                                    </h4>
+		                                    <div class="pilot-seats">
+			                                    @Html.EditorFor(m => m.CrewMax, new {htmlAttributes = new {@class = "form-control"}})
+		                                    </div>
+	                                    </div>
+                                        <div class="col-sm-6">
+                                            <h4 class="text-center">
+                                                Passenger Seats
+                                            </h4>
+                                            <div class="text-center">
+                                                @Html.EditorFor(m => m.PassengerMax, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="color-picker-container row">
+                                            <div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+                                                <h4 class="text-center">Color</h4>
+                                                <div class="text-center">
+                                                    <a href="#colorPickerModal" class="modal-pick text-center" data-toggle="modal" data-target="#colorPickerModal" style="color: @Model.Color">
+                                                        @Html.FontAwesome(FontAwesomeIconSet.Plane)
+                                                    </a>
+                                                    <div id="colorPickerModal" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                    <h4 class="modal-title" id="gridSystemModalLabel">Pick Plane Color</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="container-fluid">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-3 color-picker-plane text-center" style="color: @Model.Color">
+                                                                                @Html.FontAwesome(FontAwesomeIconSet.Plane)
+                                                                            </div>
+                                                                            <div class="col-sm-9">
+                                                                                @Html.DropDownListFor(model => model.Color, new SelectList(colorList, "Key", "Value", ""), new { id = "colorPicker" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default modal-close" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary modal-save" data-dismiss="modal">Update Color</button>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-4 col-md-3">
+                                                <h4 class="text-center">Black Text</h4>
+                                                <div class="text-center">
+                                                    <div style="display: inline-block">
+                                                        @Html.CheckBoxFor(m => m.BlackText, new { id = "BlackOrWhite", @class = "checkbox" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-sm-offset-1">
+                            <div class="form-group">
+                                <h3>Viewers</h3>
+                                <div class="viewer-list">
+                                    @Html.CheckBoxListFor(
+                                        model => model.PostedViewers.PlaneViewerIds, // checkbox list name, 'PostedViewers.PlaneViewerIds' in this case
+                                        model => model.AvailibleViewers, // List<PlaneViewer>()
+                                        planeViewer => planeViewer.UserId, // PlaneViewer.Id
+                                        planeViewer => db.Users.Find(planeViewer.UserId).FirstName + " " + db.Users.Find(planeViewer.UserId).LastName + "<br />" + planeViewer.UserName, // PlaneViewer.UserName
+                                        model => Model.SelectedViewers // List<PlaneViewer>() - should contain only planeViewers to be selected
+                                        )
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group text-center">
+                                <div class=" btn-group btn-group-lg">
+                                    <input type="submit" value="Save" class="btn btn-saffron-umbrella-1" />
+                                    @Html.ActionLink("Cancel", "Details", new { id = @Model.TailNumber }, new { @class = "btn btn-saffron-umbrella-1" })
+                                    @Html.ActionLink("List", "Index", null, new { @class = "btn btn-saffron-umbrella-1" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-simplecolorpicker-master/jquery.simplecolorpicker.js"></script>
+<script src="~/Scripts/plane-color-picker.js"></script>

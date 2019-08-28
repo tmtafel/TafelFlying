@@ -1,0 +1,55 @@
+﻿@using Mvc.RazorTools.FontAwesome
+@using TafelFlyingServices.Models
+@model IEnumerable<TafelFlyingServices.Models.Flight>
+
+<table class="table">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Tail Number
+        </th>
+        <th>
+            Depart
+        </th>
+        <th>
+            Arrive
+        </th>
+        <th>
+            Pilots
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (Flight item in Model)
+    {
+        string picName = (item.PilotInCommand == null) ? "" : item.PilotInCommand.ApplicationUser.FirstName + " " + item.PilotInCommand.ApplicationUser.LastName;
+        string sicName = (item.SecondInCommand == null) ? "" : item.SecondInCommand.ApplicationUser.FirstName + " " + item.SecondInCommand.ApplicationUser.LastName;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plane.TailNumber)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureAirport.AirportId)<br />
+                @item.Departure.ToShortTimeString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalAirport.Name)<br />
+                @item.Arrival.ToShortTimeString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => picName)<br />
+                @Html.DisplayFor(modelItem => sicName)
+            </td>
+            <td class="fa-flights">
+                <a href="/Flights/Details/@item.FlightId">@Html.FontAwesome(FontAwesomeIconSet.InfoCircle)</a>
+            </td>
+        </tr>
+    }
+
+</table>

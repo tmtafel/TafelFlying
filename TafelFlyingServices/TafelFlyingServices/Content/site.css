@@ -1,0 +1,240 @@
+﻿body {
+  padding-bottom: 20px;
+  padding-top: 50px; }
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+  padding-left: 15px;
+  padding-right: 15px; }
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+  white-space: normal; }
+
+/* Set width on the form input elements since they're 100% wide by default */
+input, select, textarea {
+  max-width: 280px; }
+
+#dvIsPilot {
+  max-width: 280px;
+  -ms-box-shadow: none;
+  -webkit-box-shadow: none;
+  border: none;
+  box-shadow: none;
+  padding: 0; }
+  #dvIsPilot .col-xs-4 {
+    line-height: 42px;
+    padding: 0 4px;
+    text-align: right;
+    width: 105px; }
+  #dvIsPilot .col-xs-2 {
+    padding: 4px 0;
+    width: 34px; }
+    #dvIsPilot .col-xs-2 input {
+      margin: 0; }
+
+/*.gm-style-iw div { overflow: hidden !important; height: 100% !important; }*/
+form.search-airports-form {
+  font-size: 20px; }
+  form.search-airports-form .search-country select, form.search-airports-form .search-string input {
+    font-size: 16px; }
+
+/*.create-plane .map-overlay,
+.create-plane .map-container .gm-style select.map-style,
+.create-plane .map-container .gm-style input.fit-bound,
+.create-plane .map-container .gm-style input.current-location,
+.create-plane .map-container .gm-style .gmnoprint .gm-style-mtc { display: none; }
+
+.find-location .map-overlay,
+.find-location .map-container .gm-style select.map-style,
+.find-location .map-container .gm-style input.fit-bound,
+.find-location .map-container .gm-style input.current-location,
+.find-location .map-container .gm-style .gmnoprint .gm-style-mtc { display: none; }
+
+.airports-full-screen .all-airports .map-container { width: 100% !important; }
+.airports-full-screen .all-airports .map-container .gm-style select.map-style,
+.airports-full-screen .all-airports .map-overlay,
+.airports-full-screen .all-airports .map-container .gmnoprint .gm-style-mtc,
+.airports-full-screen .all-airports .map-container .gm-style input.current-location { display: none; }
+.airports-full-screen .all-airports .map-container .gm-style input { left: 386px !important; }
+.airports-full-screen .all-airports .map-container .gm-style input.fit-bound { top: 4px !important; left: 529px !important; width: 21px; background-image: url('../Scripts/img/fit-bounds.png'); -moz-background-position-y: 1px; -o-background-position-y: 1px; background-position-y: 1px; }
+
+.airports-full-screen .all-airports .all-airports-table .all-airports-table-body { padding: 0; }
+.airports-full-screen .all-airports .all-airports-table .all-airports-table-body i { font-size: 24px; }
+.airports-full-screen .find-new-airport { text-align: right; }
+.airports-full-screen .find-new-airport a { color: #000000; }*/
+.airports-mobile-screen .fa {
+  font-size: 40px; }
+
+.calendar-month {
+  background-color: #ffffff; }
+  .calendar-month .day-of-week {
+    float: left;
+    text-align: center;
+    width: 14.25%; }
+  .calendar-month .day-in-month-view {
+    float: left;
+    padding: 0;
+    width: 14.25%; }
+    .calendar-month .day-in-month-view.single-day {
+      border: 1px solid #000000;
+      margin-left: -1px;
+      min-height: 100px; }
+      .calendar-month .day-in-month-view.single-day .day-number {
+        background-color: #000000;
+        color: #ffffff;
+        padding-bottom: 3px;
+        padding-left: 5px; }
+      .calendar-month .day-in-month-view.single-day:hover {
+        background-color: #f5f5f5;
+        cursor: pointer; }
+      .calendar-month .day-in-month-view.single-day.today {
+        background-color: #F5F6A6; }
+    .calendar-month .day-in-month-view .flight-info {
+      padding: 5px; }
+
+.day-container .day-view .schedule div.plane-div {
+  border-style: solid;
+  border-width: 2px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding: 10px; }
+  .day-container .day-view .schedule div.plane-div .plane-info {
+    font-size: 28px;
+    text-align: center; }
+
+.day-container div p {
+  margin-bottom: 0; }
+
+.mobile-calendar {
+  margin-left: -30px;
+  margin-right: -30px; }
+  .mobile-calendar .week-view .single-day {
+    min-height: 60px; }
+    .mobile-calendar .week-view .single-day .date-title {
+      background-color: blue;
+      color: #ffffff;
+      margin: 0 3px;
+      padding: 3px; }
+    .mobile-calendar .week-view .single-day .flight-info {
+      margin: 0 3px; }
+
+#color-picker .simplecolorpicker {
+  max-width: 280px;
+  padding-left: 4px; }
+
+#color-picker .color-select {
+  display: none; }
+
+.create-flight input[type=time]::-webkit-outer-spin-button, .create-flight input[type=time]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+.create-flight input[type=date]::-webkit-outer-spin-button, .create-flight input[type=date]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+.create-flight input[type=number]::-webkit-outer-spin-button, .create-flight input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+.table tbody tr td.fa-flights {
+  font-size: 40px;
+  line-height: 24px;
+  text-align: right;
+  width: 100px; }
+
+.pilot-buttons input {
+  margin: 20px 0;
+  vertical-align: top; }
+
+.pilot-buttons ul {
+  padding-left: 52px; }
+
+.nav-image {
+  background-image: url("../Image/logo/TafelFlyingLogo-91x40.png");
+  background-repeat: no-repeat;
+  height: 40px;
+  margin: 5px 0;
+  width: 91px; }
+  .nav-image:hover {
+    background-image: url("../Image/logo/TafelFlyingLogo-753x330-hover.png"); }
+
+.flight-info {
+  color: #ffffff;
+  font-size: 12px;
+  padding-bottom: 3px; }
+
+.float-right {
+  float: right; }
+
+.float-left {
+  float: left; }
+
+.powerplant input {
+  max-width: none; }
+
+.viewer-list label {
+  float: left; }
+
+.viewer-list input {
+  float: left;
+  clear: left;
+  font-size: 2em;
+  height: 1em;
+  margin: 6px 10px;
+  opacity: 1;
+  padding: 0;
+  width: 1em; }
+
+.mobile-flight {
+  margin: 15px 0; }
+  .mobile-flight h3, .mobile-flight h4 {
+    margin-top: 5px; }
+
+.plane-details {
+  margin-top: 100px; }
+  .plane-details .plane-header {
+    -moz-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    left: 0;
+    padding: 10px 0 10px;
+    position: fixed;
+    top: 51px;
+    width: 100%;
+    z-index: 1029; }
+    .plane-details .plane-header h2 {
+      margin: 0; }
+
+.color-picker-plane {
+  color: #000000;
+  font-size: 72px; }
+
+.modal-pick {
+  font-size: 48px; }
+  .modal-pick:focus {
+    outline: none; }
+
+.color-picker-container input {
+  font-size: 2em;
+  height: 1em;
+  margin: 15px 10px !important;
+  opacity: 1;
+  padding: 0;
+  width: 1em; }
+
+.btn-group.btn-group-lg.visible-xs.btn-group-vertical a:first-child {
+  -ms-border-top-right-radius: 6px;
+  border-top-right-radius: 6px; }
+
+.btn-group.btn-group-lg.visible-xs.btn-group-vertical a:last-child {
+  -ms-border-bottom-left-radius: 6px;
+  border-bottom-left-radius: 6px; }
+
+.create-new-plane {
+  margin-top: 15px; }
+

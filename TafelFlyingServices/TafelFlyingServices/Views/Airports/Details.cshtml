@@ -1,0 +1,141 @@
+﻿@model TafelFlyingServices.Models.Airport
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Airport</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.AirportId)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AirportId)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.StateOrProvidence)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StateOrProvidence)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Country)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Country)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Altitude)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Altitude)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TimezoneName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TimezoneName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DST)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DST)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Latitude)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Latitude)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Longitude)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Longitude)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-8">
+            <div class="map-container"></div>
+        </div>
+    </div>
+    
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {id = Model.AirportId}) |
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Delete", "Delete", new {id = Model.AirportId})
+</p>
+
+<script>
+    $(document).ready(function() {
+        $(".map-container").GoogleMapEditor({
+            editMode: false,
+            markerPinsPath: "/Scripts/img/pin/",
+            stylesPath: "//Scripts/styles.json",
+            locations: [
+                {
+                    "Coordinates": [
+                        {
+                            "Latitude": @Model.Latitude,
+                            "Longitude": @Model.Longitude,
+                        }
+                    ],
+                    "Radius": 0,
+                    "LocationType": "marker",
+                    "Icon": "airport.png",
+                    "Message": "(" + @Model.Latitude + " , " + @Model.Longitude + ")",
+                    "Tag": null
+                }
+            ],
+            center: { "latitude": @Model.Latitude, "longitude": @Model.Longitude },
+            zoom: 12,
+            zoomControl: true,
+            panControl: true,
+            scaleControl: false,
+            streetViewControl: false,
+            searchBox: false,
+            richtextEditor: false,
+
+
+        });
+    });
+</script>

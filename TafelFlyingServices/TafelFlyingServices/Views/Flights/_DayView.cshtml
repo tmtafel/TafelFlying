@@ -1,0 +1,190 @@
+﻿@using TafelFlyingServices.Models
+@model TafelFlyingServices.Models.FlightCalendar
+
+@{
+    string today = DateTime.Now.Date.ToString("yyyy-M-d");
+    int index = 0;
+    int todayIndex = 0;
+    var months = new Dictionary<int, string> {{1, "January"}, {2, "February"}, {3, "March"}, {4, "April"}, {5, "May"}, {6, "June"}, {7, "July"}, {8, "August"}, {9, "September"}, {10, "October"}, {11, "November"}, {12, "December"}};
+}
+<div class="mobile-calendar">
+    <div class="week-view">
+        @foreach (var days in Model.Weeks.Select(week => new List<FlightDay> {week.Sunday, week.Monday, week.Tuesday, week.Wednesday, week.Thursday, week.Friday, week.Saturday}))
+        {
+            <div>
+                @foreach (var day in days)
+                {
+                    var id = @day.Day.Date.ToString("yyyy-M-d");
+                    todayIndex = (id == today) ? index : todayIndex;
+                    string monthName = months.Where(d => d.Key == day.Day.Month).Select(d => d.Value).First();
+                    <div id="@id">
+                        <div class="single-day">
+                            <div class="date-title">
+                                <strong>
+                                    @day.Day.DayOfWeek <span class="float-right">@monthName @day.Day.Day, @day.Day.Year</span>
+                                </strong>
+                            </div>
+                            @if (day.Flights != null)
+                            {
+                                foreach (var flight in day.Flights)
+                                {
+                                    <div class="flight-info" style="background-color: @flight.Color;">
+                                        @flight.TailNumber<br /> @flight.Departure.AirportCode - @flight.Arrival.AirportCode
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            index++;
+        }
+    </div>
+</div>
+<script>
+    var indexStart = @todayIndex;
+
+    function getNextWeek(date) {
+        $.ajax({
+            url: '@Url.Action("GetNextWeek")',
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            data: { dateString: date },
+            cache: false,
+            success: function(data) {
+                var week = buildWeekDiv(data);
+                $('.week-view').slick('slickAdd', week);
+            },
+            error: function(xhr) {
+                alert('error');
+            }
+        });
+    }
+
+    function getPrevWeek(date) {
+        $.ajax({
+            url: '@Url.Action("GetPrevWeek")',
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            data: { dateString: date },
+            cache: false,
+            success: function(data) {
+                var week = buildWeekDiv(data);
+                $('.week-view').slick('slickAdd', week, 0, true);
+                $('.week-view').slick('slickGoTo', 1, true);
+            },
+            error: function(xhr) {
+                alert('error');
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $('.week-view').slick({
+            autoplay: false,
+            adaptiveHeight: true,
+            infinite: false,
+            mobileFirst: true,
+            initialSlide: indexStart,
+        });
+        $('.week-view').on('afterChange', function(event, slick, currentSlide) {
+            var lastSlideIndex = slick.slideCount - 1;
+            if (currentSlide == 0) {
+                var $firstSlide = $(slick.$slides.get(currentSlide));
+                var firstdates = $firstSlide.children("div");
+                var firstDate = $(firstdates.first()).prop("id");
+                firstDateSplit = firstDate.split("-");
+
+                getPrevWeek(firstDate);
+            }
+            if (currentSlide == lastSlideIndex) {
+                var $slide = $(slick.$slides.get(currentSlide));
+                var dates = $slide.children("div");
+                var lastDate = $(dates.last()).prop("id");
+                getNextWeek(lastDate);
+            }
+        });
+    });
+
+    function buildWeekDiv(data) {
+        var week = $.parseJSON(data);
+        var sunday = buildDayDiv(week.Sunday, "Sunday");
+        var monday = buildDayDiv(week.Monday, "Monday");
+        var tuesday = buildDayDiv(week.Tuesday, "Tuesday");
+        var wednesday = buildDayDiv(week.Wednesday, "Wednesday");
+        var thursday = buildDayDiv(week.Thursday, "Thursday");
+        var friday = buildDayDiv(week.Friday, "Friday");
+        var saturday = buildDayDiv(week.Saturday, "Saturday");
+
+        var allWeek = "<div>" + sunday + monday + tuesday + wednesday + thursday + friday + saturday + "</div>";
+        return allWeek;
+    }
+
+    function buildDayDiv(date, dow) {
+        var flights = date.Flights;
+        var flightArray = new Array();
+        $(flights).each(function() {
+            var color = this.Color;
+            var tailnumber = this.TailNumber;
+            var departure = this.Departure.AirportCode;
+            var arrival = this.Arrival.AirportCode;
+            var flight = new Flight(color, tailnumber, departure, arrival);
+            flightArray.push(flight);
+        });
+        var dateString = date.Day;
+        var dsa1 = dateString.split("t");
+        var dsa2 = dsa1[0].split("-");
+        var year = parseInt(dsa2[0]);
+        var month = parseInt(dsa2[1]);
+        var day = parseInt(dsa2[2]);
+        var dv = new DayView(year, month, day, dow, flightArray);
+        var dayDiv = createDayInDiv(dv);
+        return dayDiv;
+    }
+
+    function createDayInDiv(dv) {
+        var maindiv =
+            "<div id='" + dv.id + "'>" +
+                "<div class='single-day'>" +
+                "<div class='date-title'>" +
+                "<strong>" + dv.dayOfWeek + "" +
+                "<span class='float-right'>" + dateString(dv.date) + "</span>" +
+                "</strong>" +
+                "</div>";
+        var flights = dv.flights;
+        $(flights).each(function() {
+            var flight = "<div class='flight-info' style='background-color: " + this.color + ";'>" +
+                this.tailnumber + "<br />" + this.depart + " - " + this.arrive +
+                "</div>";
+            maindiv += flight;
+        });
+
+        maindiv += "</div></div>";
+        return maindiv;
+    }
+
+    function dateString(date) {
+        var months = { 0: "January", 1: "February", 2: "March", 3: "April", 4: "May", 5: "June", 6: "July", 7: "August", 8: "September", 9: "October", 10: "November", 11: "December" };
+        var month = months[date.getMonth()];
+        var stringDate = month + " " + date.getDate() + ", " + date.getFullYear();
+        return stringDate;
+    }
+
+    function DayView(year, month, day, dayOfWeek, flights) {
+        this.id = year.toString() + "-" + month.toString() + "-" + day.toString();
+        this.date = new Date(year, month - 1, day, 0, 0, 0, 0);
+        this.dayOfWeek = dayOfWeek;
+        this.flights = flights;
+    }
+
+    function Flight(color, tailnumber, depart, arrive) {
+        this.color = color;
+        this.tailnumber = tailnumber;
+        this.depart = depart;
+        this.arrive = arrive;
+    }
+</script>

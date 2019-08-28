@@ -1,0 +1,66 @@
+﻿@using System.Globalization
+@using TafelFlyingServices.Models
+@model IEnumerable<TafelFlyingServices.Models.Trip>
+
+@{
+    ViewBag.Title = "Active Trips";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Invoice", "Create")
+    @Html.ActionLink("Past Invoices", "PastTrips", null, new {@class = "float-right"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Plane.TailNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalExpenses)
+        </th>
+        <th>
+            # Trips
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (Trip item in Model)
+    {
+        string totalExpenses = "$" + Convert.ToDecimal(item.TotalExpenses).ToString(CultureInfo.InvariantCulture);
+        int count;
+        try
+        {
+            count = item.SelectedFlightIds.Count();
+        }
+        catch
+        {
+            count = 0;
+        }
+
+        <tr>
+            <td>
+                #@Html.DisplayFor(modelItem => item.InvoiceNumber)
+            </td>
+            <td>
+                @Html.ActionLink(item.TailNumber, "Details", "Planes", new {id = item.TailNumber}, null)
+            </td>
+            <td>
+                @Html.ActionLink(totalExpenses, "Invoice", "Expenses", new {id = item.InvoiceNumber}, null)
+            </td>
+            <td>
+                @count
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.InvoiceNumber}) |
+                @Html.ActionLink("Details", "Details", new {id = item.InvoiceNumber}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.TripId})
+            </td>
+        </tr>
+    }
+
+</table>

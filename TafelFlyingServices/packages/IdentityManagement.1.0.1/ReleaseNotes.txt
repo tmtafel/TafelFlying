@@ -1,0 +1,4 @@
+﻿Version 1.0.1
+--------------
+- Added IdentitySettings class
+- Added ability to lock and unlock accounts

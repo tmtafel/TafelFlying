@@ -1,0 +1,47 @@
+﻿@model TafelFlyingServices.Models.LayoutViewModel
+@{
+	ViewBag.Title = "Layout";
+	var height = @Model.Height + "px";
+	var width = @Model.Width + "px";
+	var top = @Model.Top + "px";
+	var left = @Model.Left + "px";
+}
+<link href="~/Content/cabin-layout.css" rel="stylesheet" />
+<h2>Layout </h2>
+<div class="container">
+	<div class="col-md-9 col-sm-6 col-xs-12 text-center">
+		<h2 id="tailnumber">@Model.TailNumber</h2>
+	</div>
+	<div class="col-md-3 col-sm-6 col-xs-12 text-center">
+		<a id="save" href="#" class="btn btn-saffron-umbrella-1 btn-lg" data-save='@Url.Action("UpdateCabinLayout")'>Save Changes</a>
+		<a id="back" href="/Planes/Edit/@Model.TailNumber" class="btn btn-saffron-umbrella-1 btn-lg">Back</a>
+	</div>
+</div>
+<div id="layout" class="container">
+	<div id="cabinContainer" class="col-md-9 col-sm-6 col-xs-12">
+		<div id="cabin" style="height:@height; width:@width; left: @left; top:@top;">
+			@foreach (var seat in Model.Seats)
+			{
+				<div class="seat" style="@string.Format("position: absolute; top: {0}px; left: {1}px;", seat.Top, seat.Left)" 
+				     data-index="@seat.Index" 
+				     data-direction="@seat.Direction" 
+				     data-type="@seat.Type" 
+				     data-toggle="tooltip" 
+					 title="@seat.Type">
+					<div class="seat-image seat-direction-@seat.Direction"></div>
+				</div>
+			}
+		</div>
+	</div>
+	<div class="col-md-3 col-sm-6 col-xs-12">
+		@Html.Partial("CabinLayout/_Options")
+	</div>
+</div>
+
+
+@Html.Partial("CabinLayout/_SeatModal")
+@Html.Partial("CabinLayout/_DropDownMenu")
+@Html.Partial("CabinLayout/_AlertModal")
+
+
+<script src="~/Scripts/cabin-layout.js"></script>

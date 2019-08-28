@@ -1,0 +1,80 @@
+﻿@Scripts.Render("~/bundles/jquery")
+@using TafelFlyingServices.Models
+@model IEnumerable<TafelFlyingServices.Models.Airport>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+@using (Html.BeginForm("Search", "Airports", FormMethod.Get, new {@class = "search-airports-form"}))
+{
+    <div class="row">
+        <div class="col-md-2">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    @Html.RadioButton("selector", false, true, new {id = "search-code", @class = "search-radio-button"}) Code
+                </div>
+                <div class="col-md-6">
+                    @Html.RadioButton("selector", true, false, new {id = "search-city", @class = "search-radio-button"}) City
+                </div>
+                
+                <span class="search-string col-md-12">@Html.TextBox("SearchString", String.Empty, new {@class = "form-control"})</span>
+            </div>
+        </div>
+
+        <div class="col-md-4 search-country hide">
+            <span class="col-md-12 form-group">Country: @Html.DropDownList("country", (IEnumerable<SelectListItem>) ViewBag.countries, new {@class = "form-control"})</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <button type="submit" class="btn btn-default">Find</button>
+        </div>
+        <div class="col-md-6 form-group">
+            @Html.ActionLink("Cannot Find Airport", "Create")
+        </div>
+    </div>
+}
+
+<table class="table table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AirportId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (Airport item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.ActionLink("Select", "Create", new {id = item.AirportId})
+            </td>
+        </tr>
+    }
+
+</table>
+<script src="~/Scripts/SearchRadioButton.js"></script>

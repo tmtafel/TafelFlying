@@ -1,0 +1,100 @@
+﻿@using Mvc.RazorTools.FontAwesome
+@using TafelFlyingServices.Models
+@model IEnumerable<TafelFlyingServices.Models.IndexPlaneViewModel>
+
+@{
+    ViewBag.Title = "My Planes";
+}
+<div class="container-fluid">
+    <div class="row hidden-xs">
+        <h2 class="col-sm-3">My Planes</h2>
+        <div class="col-sm-9 text-right">
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="btn-group btn-group-lg create-new-plane">
+                    @Html.ActionLink("Create New Plane", "Create", null, new { @class = "btn btn-saffron-umbrella-1" })
+                    @Html.ActionLink("Create New Aircraft", "Create", "Aircraft", null, new { @class = "btn btn-saffron-umbrella-1" })
+                </div>
+            }
+
+        </div>
+
+
+    </div>
+    <div class="row visible-xs">
+        <h2 class="col-xs-12 visible-xs text-center">My Planes</h2>
+    </div>
+    <div class="row hidden-xs">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Tail Number
+                        </th>
+                        <th class="text-center">
+                            Make
+                        </th>
+                        <th class="text-center">
+                            Model
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="color: @item.Color;">
+                                @Html.FontAwesome(FontAwesomeIconSet.Plane)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TailNumber)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Make)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Model)
+                            </td>
+                            <td class="text-right">
+                                @Html.ActionLink("Details", "Details", new { id = item.TailNumber })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row visible-xs">
+        <div class="col-xs-12">
+            <ul class="list-group">
+                @foreach (var item in Model)
+                {
+
+                    <li class="list-group-item" style="background-color: @item.Color;">
+                        <a href="/Planes/Details/@item.TailNumber" style="color: @item.BlackText;">
+                            <h2 class=" text-center" style="color: @item.BlackText;">
+                                @Html.FontAwesome(FontAwesomeIconSet.Plane) @Html.DisplayFor(modelItem => item.TailNumber)
+                            </h2>
+                        </a>
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="btn-group btn-group-lg visible-xs btn-group-vertical">
+                    @Html.ActionLink("Create New Plane", "Create", null, new {@class = "btn btn-saffron-umbrella-1"})
+                    @Html.ActionLink("Create New Aircraft", "Create", "Aircraft", null, new {@class = "btn btn-saffron-umbrella-1"})
+                </div>
+            </div>
+        </div>
+    }
+</div>

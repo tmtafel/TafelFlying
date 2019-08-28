@@ -1,0 +1,216 @@
+﻿@using Geocoding
+@using TafelFlyingServices.Models
+@model TafelFlyingServices.Models.Trip
+
+@{
+
+    var db = new ApplicationDbContext();
+    ViewBag.Title = "Details";
+    var fd = new FlightDay();
+    fd.Flights = new List<FlightView>();
+    foreach (Flight flight in Model.Flights)
+    {
+        Plane plane = db.Planes.Where(f => f.TailNumber == flight.Plane.TailNumber).Select(p => p).First();
+        var fv = new FlightView();
+        fv.Arrival = new LocationDate
+        {
+            AirportCode = flight.ArrivalAirport.AirportId,
+            City = flight.ArrivalAirport.City,
+            Date = flight.Arrival.ToShortDateString(),
+            Latitude = flight.ArrivalAirport.Latitude,
+            Longitude = flight.ArrivalAirport.Longitude,
+            Name = flight.ArrivalAirport.Name,
+            State = flight.ArrivalAirport.StateOrProvidence,
+            Time = flight.Arrival.ToShortTimeString()
+        };
+        fv.Departure = new LocationDate
+        {
+            AirportCode = flight.DepartureAirport.AirportId,
+            City = flight.DepartureAirport.City,
+            Date = flight.Departure.ToShortDateString(),
+            Latitude = flight.DepartureAirport.Latitude,
+            Longitude = flight.DepartureAirport.Longitude,
+            Name = flight.DepartureAirport.Name,
+            State = flight.DepartureAirport.StateOrProvidence,
+            Time = flight.Departure.ToShortTimeString()
+        };
+        fv.FlightNumber = flight.FlightNumber;
+        if (flight.PilotInCommand != null)
+        {
+            fv.Pic = flight.PilotInCommand.ApplicationUser.FirstName + " " + flight.PilotInCommand.ApplicationUser.LastName;
+        }
+        if (flight.SecondInCommand != null)
+        {
+            fv.Sic = flight.SecondInCommand.ApplicationUser.FirstName + " " + flight.SecondInCommand.ApplicationUser.LastName;
+        }
+        fv.TailNumber = flight.Plane.TailNumber;
+        fd.Flights.Add(fv);
+    }
+    var latitudes = new List<double>();
+    var longitudes = new List<double>();
+    foreach (FlightView flight in fd.Flights)
+    {
+        double depatureLatitude = db.Airports.Where(a => a.AirportId == flight.Departure.AirportCode).Select(a => a).First().Latitude;
+        double arrivalLatitude = db.Airports.Where(a => a.AirportId == flight.Arrival.AirportCode).Select(a => a).First().Latitude;
+        if (!latitudes.Contains(depatureLatitude))
+        {
+            latitudes.Add(depatureLatitude);
+        }
+        if (!latitudes.Contains(arrivalLatitude))
+        {
+            latitudes.Add(arrivalLatitude);
+        }
+
+        double depatureLongitude = db.Airports.Where(a => a.AirportId == flight.Departure.AirportCode).Select(a => a).First().Longitude;
+        double arrivalLongitude = db.Airports.Where(a => a.AirportId == flight.Arrival.AirportCode).Select(a => a).First().Longitude;
+        if (!longitudes.Contains(depatureLongitude))
+        {
+            longitudes.Add(depatureLongitude);
+        }
+        if (!longitudes.Contains(arrivalLongitude))
+        {
+            longitudes.Add(arrivalLongitude);
+        }
+    }
+    fd.Bounds = new Bounds(33.942536, -118.408075, 40.639751, -73.778925);
+    if (latitudes.Count != 0 && longitudes.Count != 0)
+    {
+        latitudes.Sort();
+        longitudes.Sort();
+        fd.Bounds = new Bounds(latitudes.First(), longitudes.First(), latitudes.Last(), longitudes.Last());
+    }
+}
+
+
+
+<div>
+    <h2 class="text-center">Invoice #@Model.InvoiceNumber</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <h3 class="text-center">@Model.Plane.TailNumber</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="text-center"><h4>Expenses</h4></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.PilotFee != null)
+                    {
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.PilotFee)</td>
+                            <td class="text-right">$@Html.DisplayFor(model => model.PilotFee)</td>
+                        </tr>
+                    }
+                    @if (Model.CoPilotFee != null)
+                    {
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.CoPilotFee)</td>
+                            <td class="text-right">$@Html.DisplayFor(model => model.CoPilotFee)</td>
+                        </tr>
+                    }
+                    @foreach (Expense expense in Model.Expenses)
+                    {
+                        <tr>
+                            <td>
+                                @expense.Type
+                            </td>
+                            <td class="text-right">
+                                <a href="@Url.Action("getImage", "Expenses", new {id = expense.ExpenseId})" target="_blank">
+                                    $@expense.Amount
+                                </a>
+                            </td>
+
+                        </tr>
+                    }
+                    <tr>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.TotalCost)</strong>
+                        </td>
+                        <td class="text-right">
+                            <strong>$@Html.DisplayFor(model => model.TotalCost)</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="text-center"><h4>Flights</h4></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Flight flight in Model.Flights)
+                    {
+                        <tr>
+                            <td>
+                                @flight.Departure.ToString("MM-dd-yyyy")
+                            </td>
+                            <td class="text-right">
+                                @flight.DepartureAirport.AirportId - @flight.ArrivalAirport.AirportId
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        @if (Model.Flights != null)
+        {
+            <div class="col-md-8">
+                <div id="map-canvas" style="height: 500px"></div>
+            </div>
+        }
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {id = Model.InvoiceNumber}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<script type="text/javascript"
+        src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCFyqTpotZJBGzsULjGkjTN87tnTiT0isE&libraries=geometry">
+
+
+
+</script>
+<script src="~/Scripts/FlightDetails.js"></script>
+
+<script type="text/javascript">
+    function initialize() {
+
+        var map = new window.google.maps.Map(document.getElementById('map-canvas'));
+
+        var swBound = new window.google.maps.LatLng(@fd.Bounds.SouthWest.Latitude, @fd.Bounds.SouthWest.Longitude);
+        var neBound = new window.google.maps.LatLng(@fd.Bounds.NorthEast.Latitude, @fd.Bounds.NorthEast.Longitude);
+        var bounds = new window.google.maps.LatLngBounds(swBound, neBound);
+        map.fitBounds(bounds);
+        @foreach (FlightView f in fd.Flights)
+        {
+            <text>
+        var depature = makeMarker(
+            @f.Departure.Latitude,
+            @f.Departure.Longitude,
+            "@f.Departure.Name",
+            "@f.Departure.AirportCode",
+            "@f.Departure.City",
+            "@f.Departure.State",
+            map
+        );
+        var arrival = makeMarker(
+            @f.Arrival.Latitude,
+            @f.Arrival.Longitude,
+            "@f.Arrival.Name",
+            "@f.Arrival.AirportCode",
+            "@f.Arrival.City",
+            "@f.Arrival.State",
+            map
+        );
+        createFlightPath(depature, arrival, map, "@f.Color");
+        </text>
+        }
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>

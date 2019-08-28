@@ -1,0 +1,107 @@
+﻿@using TafelFlyingServices.Models
+@model TafelFlyingServices.Models.EditPlaneViewModel
+<link href="~/Content/simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet" />
+<link href="~/Content/simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet" />
+<link href="~/Content/simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet" />
+<link href="~/Content/simplecolorpicker/jquery.simplecolorpicker-regularfont.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Create";
+    var db = new ApplicationDbContext();
+    Dictionary<int, string> aircraftList = db.Aircraft.ToList().ToDictionary(a => a.AircraftId, a => a.Make + "-" + a.Model);
+    var colorList = new Dictionary<string, string>
+    {
+        {"#7bd148", "#7bd148"},
+        {"#5484ed", "#5484ed"},
+        {"#a4bdfc", "#a4bdfc"},
+        {"#46d6db", "#46d6db"},
+        {"#7ae7bf", "#7ae7bf"},
+        {"#51b749", "#51b749"},
+        {"#fbd75b", "#fbd75b"},
+        {"#ffb878", "#ffb878"},
+        {"#ff887c", "#ff887c"},
+        {"#dc2127", "#dc2127"},
+        {"#dbadff", "#dbadff"},
+        {"#e1e1e1", "#e1e1e1"}
+    };
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <div class="containfer-fluid">
+            <div class="row">
+                <div class=" col-sm-offset-3 col-sm-6">
+                    <h2 class="text-center">Create New Plane</h2>
+                    <div class="form-group text-center">
+                        <h3 class="text-center">Aircraft</h3>
+                        @Html.DropDownListFor(m => m.AircraftId, new SelectList(aircraftList, "Key", "Value", ""), new {@class = "form-control visible-xs-inline-block visible-sm-inline-block visible-lg-inline-block visible-md-inline-block"})
+                        @Html.ValidationMessageFor(model => model.AircraftId, "", new {@class = "text-danger"})
+                    </div>
+
+                    <div class="form-group  text-center">
+                        <h3 class="text-center">Tail Number</h3>
+                        @Html.EditorFor(model => model.TailNumber, new {htmlAttributes = new {@class = "form-control visible-xs-inline-block visible-sm-inline-block visible-lg-inline-block visible-md-inline-block"}}) <br />
+                        @Html.ValidationMessageFor(model => model.TailNumber, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="container-fluid text-center">
+                        <div class="col-sm-6">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <h4>Pilots</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        @Html.EditorFor(model => model.CrewMin, new {htmlAttributes = new {@class = "form-control"}}) <br/>
+                                        @Html.ValidationMessageFor(model => model.CrewMin, "", new {@class = "text-danger"})
+                                    </div>
+                                    <div class="col-xs-6">
+                                        @Html.EditorFor(model => model.CrewMax, new {htmlAttributes = new {@class = "form-control"}}) <br/>
+                                        @Html.ValidationMessageFor(model => model.CrewMax, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <h4>Seats</h4>
+                                </div>
+                                <div class="row">
+                                    @Html.EditorFor(model => model.PassengerMax, new {htmlAttributes = new {@class = "form-control"}}) <br />
+                                    @Html.ValidationMessageFor(model => model.PassengerMax, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-center" id="color-picker">
+                        @Html.EditorFor(model => model.Color, new {htmlAttributes = new {@class = "color-select block"}})
+                        @Html.DropDownListFor(model => model.Color, new SelectList(colorList, "Key", "Value", ""))
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" value="Create" class="btn btn-lg btn-saffron-umbrella-1" />
+                        @Html.ActionLink("Back to List", "Index", null, new {Class = "btn btn-lg btn-saffron-umbrella-1"})
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div>
+
+</div>
+<script src="~/Scripts/jquery.simplecolorpicker.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#color-picker select").simplecolorpicker();
+        $("#color-picker .simplecolorpicker .color").on("click", function() {
+            $(".color-select").val(($(this).attr("title")));
+        });
+    });
+</script>

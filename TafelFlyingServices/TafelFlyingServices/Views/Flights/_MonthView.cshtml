@@ -1,0 +1,132 @@
+﻿@using TafelFlyingServices.Models
+@model TafelFlyingServices.Models.FlightCalendar
+@{
+    var weekdays = new List<string> {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    var testDate = new DateTime(@Model.Year, @Model.Month, 1);
+    DateTime prevDate = testDate.AddMonths(-1);
+    DateTime nextDate = testDate.AddMonths(1);
+    string today = DateTime.Now.Date.ToString("yyyy-M-d");
+}
+
+<div class="calendar container-fluid">
+    <div class="row">
+        <div class="col-sm-2 col-xs-6">
+            <h4 class="text-left">
+                <a href="/Flights/Calendar/@prevDate.Year/@prevDate.Month">Previous</a>
+            </h4>
+        </div>
+        <div class="col-sm-8 hidden-xs">
+            <h2 class="text-center">
+                @Model.MonthName @Model.Year
+            </h2>
+        </div>
+        <div class="col-sm-2 col-xs-6">
+            <h4 class="text-right">
+                <a href="/Flights/Calendar/@nextDate.Year/@nextDate.Month">Next</a>
+            </h4>
+        </div>
+        <div class="col-sm-8 visible-xs">
+            <h2 class="text-center">
+                @Model.MonthName @Model.Year
+            </h2>
+        </div>
+    </div>
+    <div class="calendar-month row">
+        <div class="week-days">
+            @foreach (string day in weekdays)
+            {
+                <div class="day-of-week">
+                    @day
+                </div>
+            }
+        </div>
+        @foreach (var days in Model.Weeks.Select(week => new List<FlightDay> {week.Sunday, week.Monday, week.Tuesday, week.Wednesday, week.Thursday, week.Friday, week.Saturday}))
+        {
+            <div class="week-in-month-view">
+                @foreach (var day in days)
+                {
+                    string id = @day.Day.Year + "-" + @day.Day.Month + "-" + @day.Day.Day;
+                    string dayClass = (id == today) ? "single-day today" : "single-day";
+                    <div id="@id" class="day-in-month-view">
+                        <div class="@dayClass">
+                            <div>
+                                <strong>
+                                    @day.Day.Day
+                                </strong>
+                            </div>
+                            @if (day.Flights != null)
+                            {
+                                foreach (var flight in day.Flights)
+                                {
+                                    <div class="flight-info" style="background-color: @flight.Color;">
+                                        @flight.TailNumber<br/> @flight.Departure.AirportCode - @flight.Arrival.AirportCode
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+<script>
+    $("#calendar").turn({
+        autoCenter: true
+    });
+</script>
+@*<table class="table table-bordered">
+			<thead>
+				<tr>
+					@foreach (var day in weekdays)
+					{
+						<th>
+							@day
+						</th>
+					}
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var days in Model.Weeks.Select(week => new List<FlightDay> { week.Sunday, week.Monday, week.Tuesday, week.Wednesday, week.Thursday, week.Friday, week.Saturday }))
+				{
+					<tr>
+						@foreach (var day in days)
+						{
+							var id = @day.Day.Year + "-" + @day.Day.Month + "-" + @day.Day.Day;
+							var dayClass = (id == today) ? "single-day today" : "single-day";
+							<td id="@id">
+								<div class="@dayClass">
+									<div>
+										<strong>
+											@day.Day.Day
+										</strong>
+									</div>
+									@if (day.Flights != null)
+									{
+										foreach (var flight in day.Flights)
+										{
+											<div class="flight-info" style="background-color: @flight.Color;">
+												@flight.TailNumber<br /> @flight.Departure.AirportCode - @flight.Arrival.AirportCode
+											</div>
+										}
+									}
+								</div>
+							</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>*@
+@*</div>*@
+
+
+@*<script>
+		$(".table tbody").on("click", "td", function () {
+			var id = $(this).attr("id");
+			var idArray = id.split("-", 3);
+			var year = idArray[0];
+			var month = idArray[1];
+			var day = idArray[2];
+			window.location.href = "/Flights/Day/" + year + "/" + month + "/" + day;
+		});
+	</script>*@

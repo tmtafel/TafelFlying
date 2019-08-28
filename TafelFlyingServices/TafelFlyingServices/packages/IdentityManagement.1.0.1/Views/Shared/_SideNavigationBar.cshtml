@@ -1,0 +1,46 @@
+﻿
+@using Commerce.IdentityManagement.Models
+@{
+    var menuItems = ViewBag.AdminNavigationMenu as IEnumerable<MenuItem>;
+    string activeAdminNavAction = ViewBag.AdminNavigationActiveMenu;
+}
+<div class="sidebar responsive" id="sidebar">
+    <ul class="nav nav-list" style="top:0px;">
+        @foreach (var menuItem in menuItems)
+        {
+            var cssParent = string.Compare(menuItem.DisplayText, activeAdminNavAction, true) == 0 ? "active" : "";
+            var linkCss = "";
+            var hasSubMenu = false;
+            if (menuItem.SubMenu != null && menuItem.SubMenu.Any())
+            {
+                hasSubMenu = true;
+                if (menuItem.SubMenu.Any(s => string.Compare(s.DisplayText, activeAdminNavAction, true) == 0))
+                {
+                    cssParent = "active open";
+                }
+                linkCss = "dropdown-toggle";
+            }
+            <li class="@cssParent">
+                <a href="@Url.Action(menuItem.Action,  menuItem.Controller)" title="@menuItem.DisplayText" class="@linkCss">
+                    <i class="@menuItem.IconCss"></i>
+                    <span class="menu-text">@menuItem.DisplayText</span>
+                </a>
+                @if (hasSubMenu)
+                {
+                    <ul class="submenu">
+                        @foreach (var sub in menuItem.SubMenu)
+                        {
+                            var cssSub = string.Compare(sub.DisplayText, activeAdminNavAction, true) == 0 ? "active" : "";
+                            <li class="@cssSub">
+                                <a href="@Url.Action(sub.Action, sub.Controller)" title="@sub.DisplayText">
+                                    <i class="@sub.IconCss"></i>
+                                    @sub.DisplayText
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+</div>

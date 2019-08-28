@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "Content/site.css",
+    "inputFile": "Content/site.scss"
+  },
+  {
+    "outputFile": "Content/cabin-layout.css",
+    "inputFile": "Content/cabin-layout.scss"
+  },
+  {
+    "outputFile": "Content/button-themes.css",
+    "inputFile": "Content/button-themes.scss"
+  }
+]

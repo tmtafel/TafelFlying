@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Airports";
+}
+@model TafelFlyingServices.Models.AirportList
+
+<h2>Airports</h2>
+
+<div class="hidden-xs airports-full-screen">
+    @Html.Partial("_AirportsFullScreen", Model)
+</div>
+@*<div class="visible-xs airports-mobile-screen">
+    @Html.Partial("_AirportsMobile", Model.Airports)
+</div>*@

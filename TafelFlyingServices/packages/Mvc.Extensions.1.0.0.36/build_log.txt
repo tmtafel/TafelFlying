@@ -1,0 +1,19 @@
+Microsoft (R) Build Engine Version 4.0.30319.1
+[Microsoft .NET Framework, Version 4.0.30319.296]
+Copyright (C) Microsoft Corporation 2007. All rights reserved.
+
+Build started 20/02/2013 09:23:22.
+Project "c:\Projects\Mvc.Extensions\src\Mvc.Extensions\Mvc.Extensions.csproj" on node 1 (default targets).
+GenerateTargetFrameworkMonikerAttribute:
+Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+CoreCompile:
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+CopyFilesToOutputDirectory:
+  Mvc.Extensions -> c:\Projects\Mvc.Extensions\src\Mvc.Extensions\bin\Release\Mvc.Extensions.dll
+Done Building Project "c:\Projects\Mvc.Extensions\src\Mvc.Extensions\Mvc.Extensions.csproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.14

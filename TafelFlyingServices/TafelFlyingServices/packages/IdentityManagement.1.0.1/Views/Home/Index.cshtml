@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Asp.Net Identity Manager";
+}
+
+@{
+    ViewBag.Title = "Manage your account";
+}
+<div class="widget-box transparent">
+    <div class="widget-header"><h4>Identity Manager</h4></div>
+    <div class="widget-body">
+        <div class="widget-main padding-6">
+            Welcome to Asp.Net Identity manager. Use the left navigator to manage:
+        </div>
+        <ul>
+            <li>Roles</li>
+            <li>User Accounts</li>
+        </ul>
+    </div>
+</div>
+@section breadcrumbs{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">Home</a>
+        </li>
+        <li class="active">Dashboard</li>
+    </ul><!-- .breadcrumb -->
+}

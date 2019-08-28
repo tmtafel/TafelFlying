@@ -1,0 +1,52 @@
+﻿@model TafelFlyingServices.Models.Expense
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Expense</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TripId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TripId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            Photo
+        </dt>
+
+        <dd>
+            <a href="@Url.Action("getImage", "Expenses", new {id = Model.ExpenseId})" target="_blank">
+                <img src="@Url.Action("getImage", "Expenses", new {id = Model.ExpenseId})" alt="@Model.Photo.SourceFilename" style="max-width: 100%;" />
+            </a>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {id = Model.ExpenseId}) |
+    @Html.ActionLink("Back to List", "Invoice", new {id = Model.InvoiceNumber})
+</p>

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<TafelFlyingServices.Models.Flight>
+@{
+    ViewBag.Title = "Upcoming Flights";
+}
+
+<h2>Upcoming Flights</h2>
+<div class="row">
+    <div class="col-xs-6">
+        @Html.ActionLink("Create New", "Create")
+    </div>
+    <div class="col-xs-6 text-right">
+        <a href="/Flights/Calendar/@DateTime.Now.Year/@DateTime.Now.Month">Calendar</a>
+    </div>
+</div>
+<p>
+
+
+</p>
+<div class="hidden-xs">
+    @Html.Partial("_AllFlightsFullScreen", Model)
+</div>
+<div class="visible-xs">
+    @Html.Partial("_AllFlightsMobile", Model)
+</div>

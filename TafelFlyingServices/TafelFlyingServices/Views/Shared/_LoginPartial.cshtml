@@ -1,0 +1,24 @@
+﻿@using TafelFlyingServices.Models
+@if (Request.IsAuthenticated)
+{
+    var db = new ApplicationDbContext();
+    string name = User.Identity.Name;
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm", @class = "navbar-right"}))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + @name, "Index", "Manage", null, new {title = "Manage"})
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Log in", "Login", "Account", null, new {id = "loginLink"})</li>
+    </ul>
+}

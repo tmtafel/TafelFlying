@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@using TafelFlyingServices.Models
+@model IEnumerable<TafelFlyingServices.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Users";
+    var db = new ApplicationDbContext();
+    Dictionary<string, string> roles = db.Roles.ToList().ToDictionary(role => role.Id, role => role.Name);
+}
+
+<h2>User Listing </h2>
+<hr />
+<p>
+    @Html.ActionLink("Create New", "Register")
+</p>
+<table class="table hidden-xs">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            Role
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAPilot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (ApplicationUser item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @{
+                    string role = null;
+                    IdentityUserRole identityUserRole = item.Roles.FirstOrDefault();
+                    if (identityUserRole != null)
+                    {
+                        roles.TryGetValue(identityUserRole.RoleId, out role);
+                    }
+                }
+                @Html.DisplayFor(modelItem => role)
+            </td>
+            <td>
+                @if (item.IsAPilot)
+                {
+                    <p>Yes</p>
+                }
+                else
+                {
+                    <p>No</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.Id})
+            </td>
+        </tr>
+    }
+
+</table>
+@foreach (ApplicationUser item in Model)
+{
+    <div class="visible-xs">
+        <h4>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </h4>
+        <p>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</p>
+
+        @{
+            string role = null;
+            IdentityUserRole identityUserRole = item.Roles.FirstOrDefault();
+            if (identityUserRole != null)
+            {
+                roles.TryGetValue(identityUserRole.RoleId, out role);
+            }
+        }
+        <p>@Html.DisplayFor(modelItem => role)</p>
+        <p>@Html.DisplayFor(modelItem => item.PhoneNumber)</p>
+    </div>
+}
